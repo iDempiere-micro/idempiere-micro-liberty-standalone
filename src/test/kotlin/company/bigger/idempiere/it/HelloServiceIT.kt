@@ -13,16 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package gcc.kt.rest.it
+package company.bigger.idempiere.it
 
-import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import javax.ws.rs.client.Client
 import javax.ws.rs.client.ClientBuilder
-import javax.ws.rs.client.Invocation
-import javax.ws.rs.client.WebTarget
-import javax.ws.rs.core.Response
 
 class HelloServiceIT {
 

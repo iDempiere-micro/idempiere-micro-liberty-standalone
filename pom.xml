@@ -22,6 +22,10 @@
         <testServerHttpsPort>9443</testServerHttpsPort>
         <warContext>idempiere-micro-liberty-standalone</warContext>
         <liberty.version>18.0.0.1</liberty.version>
+
+        <idempiere-micro.groupId>org.idempiere</idempiere-micro.groupId>
+        <idempiere-micro-invoicing-core.version>1.0-SNAPSHOT</idempiere-micro-invoicing-core.version>
+        <idempiere-micro-session-core.version>1.0-SNAPSHOT</idempiere-micro-session-core.version>
     </properties>
 
     <profiles>
@@ -30,7 +34,21 @@
             <properties>
                 <packaging.type>usr</packaging.type>
             </properties>        
-        </profile>    
+        </profile>
+
+        <profile>
+            <id>ci</id>
+            <activation>
+                <property>
+                    <name>env.INVOICING_CORE_VERSION</name>
+                </property>
+            </activation>
+            <properties>
+                <idempiere-micro.groupId>com.github.iDempiere-micro</idempiere-micro.groupId>
+                <idempiere-micro-invoicing-core.version>${env.INVOICING_CORE_VERSION}</idempiere-micro-invoicing-core.version>
+                <idempiere-micro-session-core.version>${env.SESSION_CORE_VERSION}</idempiere-micro-session-core.version>
+            </properties>
+        </profile>
     </profiles>
     
     <dependencies>
@@ -85,6 +103,17 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.25</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${idempiere-micro.groupId}</groupId>
+            <artifactId>idempiere-micro-invoicing-core</artifactId>
+            <version>${idempiere-micro-invoicing-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${idempiere-micro.groupId}</groupId>
+            <artifactId>idempiere-micro-session-core</artifactId>
+            <version>${idempiere-micro-session-core.version}</version>
         </dependency>
 
     </dependencies>

@@ -2,7 +2,6 @@
 /target/
 .*.swp
 /.project
-/.settings/
 .DS_Store
 /build/
 /.gradle/
@@ -10,3 +9,4 @@
 /.classpath
 /.vscode
 .idea
+*.iml

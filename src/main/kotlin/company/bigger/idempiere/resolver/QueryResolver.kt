@@ -1,6 +1,7 @@
-package gcc.kt.rest
+package company.bigger.idempiere.resolver
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver
+import company.bigger.idempiere.dto.Version
 
 class QueryResolver : GraphQLQueryResolver {
     companion object {

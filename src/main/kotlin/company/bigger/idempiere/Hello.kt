@@ -1,4 +1,4 @@
-package gcc.kt.rest
+package company.bigger.idempiere
 
 import javax.ws.rs.ApplicationPath
 import javax.ws.rs.core.Application

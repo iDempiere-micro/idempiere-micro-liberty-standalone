@@ -1,4 +1,4 @@
-package gcc.kt.rest
+package company.bigger.idempiere.dto
 
 /**
  * Version class to be exposed through the GraphQL

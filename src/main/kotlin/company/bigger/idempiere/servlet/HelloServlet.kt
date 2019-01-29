@@ -1,6 +1,7 @@
-package gcc.kt.rest
+package company.bigger.idempiere.servlet
 
 import com.coxautodev.graphql.tools.SchemaParser
+import company.bigger.idempiere.resolver.QueryResolver
 import graphql.schema.GraphQLSchema
 import graphql.servlet.GraphQLConfiguration
 import graphql.servlet.GraphQLHttpServlet
