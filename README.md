@@ -1,0 +1,2 @@
+# idempiere-micro-liberty-standalone
+
