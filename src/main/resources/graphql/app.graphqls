@@ -1,0 +1,14 @@
+# Version
+type Version {
+   # SemVer identifier
+   v: String!
+}
+
+type Query {
+    # The API Version
+    version: Version!
+}
+
+schema {
+    query: Query
+}

@@ -1,0 +1,12 @@
+/.settings/
+/target/
+.*.swp
+/.project
+/.settings/
+.DS_Store
+/build/
+/.gradle/
+.factorypath
+/.classpath
+/.vscode
+.idea
