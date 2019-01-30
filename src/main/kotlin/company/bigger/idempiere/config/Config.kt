@@ -33,3 +33,12 @@ object Jwt : PropertyGroup() {
     private val issuer by stringType
     val Issuer = config[issuer]
 }
+
+object Database : PropertyGroup() {
+    private val url by stringType
+    val Url = config[url]
+    private val username by stringType
+    val Username = config[username]
+    private val password by stringType
+    val Password = config[password]
+}
