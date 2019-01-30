@@ -26,6 +26,7 @@
         <idempiere-micro.groupId>org.idempiere</idempiere-micro.groupId>
         <idempiere-micro-invoicing-core.version>1.0-SNAPSHOT</idempiere-micro-invoicing-core.version>
         <idempiere-micro-session-core.version>1.0-SNAPSHOT</idempiere-micro-session-core.version>
+        <idempiere-micro-test-support.version>1.0-SNAPSHOT</idempiere-micro-test-support.version>
     </properties>
 
     <profiles>
@@ -47,6 +48,7 @@
                 <idempiere-micro.groupId>com.github.iDempiere-micro</idempiere-micro.groupId>
                 <idempiere-micro-invoicing-core.version>${env.INVOICING_CORE_VERSION}</idempiere-micro-invoicing-core.version>
                 <idempiere-micro-session-core.version>${env.SESSION_CORE_VERSION}</idempiere-micro-session-core.version>
+                <idempiere-micro-test-support.version>${env.TEST_SUPPORT_VERSION}</idempiere-micro-test-support.version>
             </properties>
         </profile>
     </profiles>
@@ -114,6 +116,20 @@
             <groupId>${idempiere-micro.groupId}</groupId>
             <artifactId>idempiere-micro-session-core</artifactId>
             <version>${idempiere-micro-session-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${idempiere-micro.groupId}</groupId>
+            <artifactId>idempiere-micro-test-support</artifactId>
+            <version>${idempiere-micro-test-support.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.natpryce</groupId>
+            <artifactId>konfig</artifactId>
+            <version>1.6.10.0</version>
         </dependency>
 
     </dependencies>

@@ -23,7 +23,7 @@ class HelloServiceIT {
     @Test
     fun testApplication() {
 
-        // Set up the path to the service
+        // Set up the path to the rest
         val port = System.getProperty("liberty.test.port")
         val contextName = System.getProperty("app.context.root")
         val path = "graphql"
