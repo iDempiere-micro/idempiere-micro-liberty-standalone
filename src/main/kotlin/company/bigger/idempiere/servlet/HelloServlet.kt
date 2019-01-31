@@ -7,7 +7,7 @@ import graphql.servlet.GraphQLConfiguration
 import graphql.servlet.GraphQLHttpServlet
 import javax.servlet.annotation.WebServlet
 
-@WebServlet(name = "HelloServlet", urlPatterns = arrayOf("graphql"), loadOnStartup = 1)
+@WebServlet(name = "HelloServlet", urlPatterns = ["graphql"], loadOnStartup = 1)
 class HelloServlet : GraphQLHttpServlet() {
 
     override fun getConfiguration(): GraphQLConfiguration {
