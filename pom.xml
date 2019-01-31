@@ -22,6 +22,7 @@
         <testServerHttpsPort>9443</testServerHttpsPort>
         <warContext>idempiere-micro-liberty-standalone</warContext>
         <liberty.version>18.0.0.1</liberty.version>
+        <jackson.databind.version>2.9.7</jackson.databind.version>
 
         <idempiere-micro.groupId>org.idempiere</idempiere-micro.groupId>
         <idempiere-micro-invoicing-core.version>1.0-SNAPSHOT</idempiere-micro-invoicing-core.version>
@@ -124,7 +125,18 @@
             <version>${idempiere-micro-test-support.version}</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>io.aexp.nodes.graphql</groupId>
+            <artifactId>nodes</artifactId>
+            <version>0.4.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.databind.version}</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>com.natpryce</groupId>
@@ -213,6 +225,10 @@
         <repository>
             <id>jcenter</id>
             <url>https://jcenter.bintray.com/</url>
+        </repository>
+        <repository>
+            <id>bintray-americanexpress-maven</id>
+            <url>https://dl.bintray.com/americanexpress/maven</url>
         </repository>
     </repositories>
 </project>

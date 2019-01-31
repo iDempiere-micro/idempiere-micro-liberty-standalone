@@ -15,29 +15,39 @@
  *******************************************************************************/
 package company.bigger.idempiere.it
 
+import company.bigger.idempiere.it.graphql.VersionRequest
+import company.bigger.idempiere.resolver.QueryResolver
+import io.aexp.nodes.graphql.GraphQLRequestEntity
+import io.aexp.nodes.graphql.GraphQLResponseEntity
+import io.aexp.nodes.graphql.GraphQLTemplate
 import org.junit.Test
-import javax.ws.rs.client.ClientBuilder
+import kotlin.test.assertEquals
 
 class HelloServiceIT {
 
+    // Set up the path to the rest
+    val port = System.getProperty("liberty.test.port")
+    val contextName = System.getProperty("app.context.root")
+    val path = "graphql"
+    val url = "http://localhost:$port/$contextName/$path"
+
+    fun <T> getGraphQL(t: Class<T>): GraphQLResponseEntity<T> {
+        //val token = getGardenUserToken()
+        val graphQLTemplate = GraphQLTemplate()
+        val requestEntity = GraphQLRequestEntity.Builder()
+            .url(url)
+            //.headers(mapOf("Content-Type" to "application/graphql"))
+            //.headers(mapOf("Authorization" to "Bearer $token"))
+            .request(t)
+            .build()
+        return graphQLTemplate.query(requestEntity, t)
+    }
+
     @Test
-    fun testApplication() {
-
-        // Set up the path to the rest
-        val port = System.getProperty("liberty.test.port")
-        val contextName = System.getProperty("app.context.root")
-        val path = "graphql"
-        val url = "http://localhost:$port/$contextName/$path"
-
+    fun `Can ask the GraphQL for version`() {
         // Make the request
-        val client = ClientBuilder.newClient()
-        val target = client.target(url)
-        val response = target.request().header("Content-Type", "application/graphql").post(null)
-
-        // Test we got an OK response
-        // TODO : write correct test
-        // assertEquals("Incorrect response code from " + url, 200, response.getStatus())
-
-        response.close()
+        val responseEntity = getGraphQL(VersionRequest::class.java)
+        println("responseEntity: $responseEntity")
+        assertEquals(QueryResolver.VER, responseEntity.response.v)
     }
 }
