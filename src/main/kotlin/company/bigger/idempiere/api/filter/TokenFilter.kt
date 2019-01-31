@@ -1,8 +1,6 @@
 package company.bigger.idempiere.api.filter
 
-import javax.servlet.*
-import javax.servlet.annotation.WebFilter
-
+/*
 @WebFilter( "/*" )
 class TokenFilter : Filter {
 
@@ -16,3 +14,4 @@ class TokenFilter : Filter {
     override fun init(filterConfig: FilterConfig?) {
     }
 }
+*/

@@ -26,22 +26,32 @@ import kotlin.test.assertEquals
 class HelloServiceIT {
 
     // Set up the path to the rest
-    val port = System.getProperty("liberty.test.port")
-    val contextName = System.getProperty("app.context.root")
-    val path = "graphql"
-    val url = "http://localhost:$port/$contextName/$path"
+    private val port = System.getProperty("liberty.test.port")
+    private val contextName = System.getProperty("app.context.root")
+    private val path = "graphql"
+    private val graphQLUrl = "http://localhost:$port/$contextName/$path"
+
+    /*private fun getGardenUserToken(): String {
+        val client = ClientBuilder.newClient()
+        val url = "http://localhost:$port/$contextName/session/GardenUser/login/GardenUser"
+        val target = client.target(url)
+        val response = target.request().get()
+        assertEquals(200, response.status)
+        return ""
+    }*/
 
     fun <T> getGraphQL(t: Class<T>): GraphQLResponseEntity<T> {
         //val token = getGardenUserToken()
         val graphQLTemplate = GraphQLTemplate()
         val requestEntity = GraphQLRequestEntity.Builder()
-            .url(url)
+            .url(graphQLUrl)
             //.headers(mapOf("Content-Type" to "application/graphql"))
             //.headers(mapOf("Authorization" to "Bearer $token"))
             .request(t)
             .build()
         return graphQLTemplate.query(requestEntity, t)
     }
+
 
     @Test
     fun `Can ask the GraphQL for version`() {

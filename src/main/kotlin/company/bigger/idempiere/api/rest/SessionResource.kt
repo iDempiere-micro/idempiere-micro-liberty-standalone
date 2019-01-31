@@ -5,16 +5,16 @@ import company.bigger.dto.UserLoginModelResponse
 import company.bigger.idempiere.api.Base
 import company.bigger.idempiere.service.SessionService
 import javax.enterprise.context.RequestScoped
+import javax.inject.Inject
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
 
 @Path("/session")
 @ApplicationPath("/")
 @RequestScoped
-class SessionResource : Base() {
-    companion object {
-        private val sessionService = SessionService()
-    }
+open class SessionResource : Base() {
+    @Inject
+    lateinit var sessionService : SessionService
 
     @GET
     @Path("/{username}/login/{password}")
@@ -23,7 +23,7 @@ class SessionResource : Base() {
         @PathParam("username") username: String,
         @PathParam("password") password: String
     ): UserLoginModelResponse? {
-        return sessionService.login(UserLoginModel(username, password))
+        return sessionService?.login(UserLoginModel(username, password))
     }
 
 }
