@@ -1,4 +1,4 @@
-package company.bigger.idempiere.servlet
+package company.bigger.idempiere.api.servlet
 
 import com.coxautodev.graphql.tools.SchemaParser
 import company.bigger.idempiere.resolver.QueryResolver

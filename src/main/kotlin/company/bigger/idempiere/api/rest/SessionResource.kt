@@ -1,8 +1,8 @@
-package company.bigger.idempiere.rest
+package company.bigger.idempiere.api.rest
 
 import company.bigger.dto.UserLoginModel
 import company.bigger.dto.UserLoginModelResponse
-import company.bigger.idempiere.Base
+import company.bigger.idempiere.api.Base
 import company.bigger.idempiere.service.SessionService
 import javax.enterprise.context.RequestScoped
 import javax.ws.rs.*

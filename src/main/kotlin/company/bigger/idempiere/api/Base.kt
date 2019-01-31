@@ -1,4 +1,4 @@
-package company.bigger.idempiere
+package company.bigger.idempiere.api
 
 import company.bigger.idempiere.db.intentionallyAssignedToCallTheInitFn
 import javax.ws.rs.core.Application
