@@ -47,7 +47,6 @@ class HelloServiceIT {
     fun `Can ask the GraphQL for version`() {
         // Make the request
         val responseEntity = getGraphQL(VersionRequest::class.java)
-        println("responseEntity: $responseEntity")
         assertEquals(QueryResolver.VER, responseEntity.response.v)
     }
 }
