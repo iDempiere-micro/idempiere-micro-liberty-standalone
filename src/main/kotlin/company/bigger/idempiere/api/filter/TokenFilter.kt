@@ -1,19 +1,18 @@
 package company.bigger.idempiere.api.filter
 
-/*@WebFilter( "/*" )
+import javax.servlet.*
+import javax.servlet.annotation.WebFilter
+
+@WebFilter( "/*" )
 class TokenFilter : Filter {
-    private val LOGGER = Logger.getLogger(TokenFilter::class.java.name)
 
     override fun destroy() {
-        LOGGER.info(">>> destroy!")
     }
 
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
-        LOGGER.info(">>> doFilter!")
+        chain?.doFilter( request, response );
     }
 
     override fun init(filterConfig: FilterConfig?) {
-        LOGGER.info(">>> init!")
     }
-
-}*/
+}
