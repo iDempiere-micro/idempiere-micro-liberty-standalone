@@ -1,0 +1,7 @@
+---
+applications:
+ - name: idempiere-micro-liberty-standalone
+   random-route: true
+   path: target/idempiere-micro-liberty-standalone.war
+   memory: 256M
+   instances: 1
