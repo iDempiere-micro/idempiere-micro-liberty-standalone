@@ -3,7 +3,7 @@
     <groupId>org.idempiere</groupId>
     <artifactId>idempiere-micro-liberty-standalone</artifactId>
     <packaging>war</packaging>
-    <version>0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     
     <parent>
         <groupId>net.wasdev.wlp.maven.parent</groupId>
@@ -21,13 +21,23 @@
         <testServerHttpPort>9080</testServerHttpPort>
         <testServerHttpsPort>9443</testServerHttpsPort>
         <warContext>idempiere-micro-liberty-standalone</warContext>
-        <liberty.version>18.0.0.1</liberty.version>
         <jackson.databind.version>2.9.7</jackson.databind.version>
+        <liberty.version>RELEASE</liberty.version>
 
         <idempiere-micro.groupId>org.idempiere</idempiere-micro.groupId>
         <idempiere-micro-invoicing-core.version>1.0-SNAPSHOT</idempiere-micro-invoicing-core.version>
         <idempiere-micro-session-core.version>1.0-SNAPSHOT</idempiere-micro-session-core.version>
         <idempiere-micro-test-support.version>1.0-SNAPSHOT</idempiere-micro-test-support.version>
+
+        <idempiere-micro-base-interfaces.version>1.0-SNAPSHOT</idempiere-micro-base-interfaces.version>
+        <idempiere-micro-model-core.version>1.0-SNAPSHOT</idempiere-micro-model-core.version>
+        <idempiere-micro-model-interfaces.version>1.0-SNAPSHOT</idempiere-micro-model-interfaces.version>
+        <idempiere-micro-crm-core.version>1.0-SNAPSHOT</idempiere-micro-crm-core.version>
+        <idempiere-micro-product-core.version>1.0-SNAPSHOT</idempiere-micro-product-core.version>
+        <idempiere-micro-tax-core.version>1.0-SNAPSHOT</idempiere-micro-tax-core.version>
+        <idempiere-micro-order-core.version>1.0-SNAPSHOT</idempiere-micro-order-core.version>
+        <idempiere-micro-process-core.version>1.0-SNAPSHOT</idempiere-micro-process-core.version>
+
     </properties>
 
     <profiles>
@@ -50,6 +60,16 @@
                 <idempiere-micro-invoicing-core.version>${env.INVOICING_CORE_VERSION}</idempiere-micro-invoicing-core.version>
                 <idempiere-micro-session-core.version>${env.SESSION_CORE_VERSION}</idempiere-micro-session-core.version>
                 <idempiere-micro-test-support.version>${env.TEST_SUPPORT_VERSION}</idempiere-micro-test-support.version>
+
+                <idempiere-micro-base-interfaces.version>${env.BASE_INTERFACES_VERSION}</idempiere-micro-base-interfaces.version>
+                <idempiere-micro-model-core.version>${env.MODEL_CORE_VERSION}</idempiere-micro-model-core.version>
+                <idempiere-micro-model-interfaces.version>${env.MODEL_INTERFACES_VERSION}</idempiere-micro-model-interfaces.version>
+                <idempiere-micro-crm-core.version>${env.CRM_CORE_VERSION}</idempiere-micro-crm-core.version>
+                <idempiere-micro-product-core.version>${env.PRODUCT_CORE_VERSION}</idempiere-micro-product-core.version>
+                <idempiere-micro-tax-core.version>${env.TAX_CORE_VERSION}</idempiere-micro-tax-core.version>
+                <idempiere-micro-order-core.version>${env.ORDER_CORE_VERSION}</idempiere-micro-order-core.version>
+                <idempiere-micro-process-core.version>${env.PROCESS_CORE_VERSION}</idempiere-micro-process-core.version>
+
             </properties>
         </profile>
     </profiles>
@@ -60,24 +80,6 @@
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>  
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-rs-client</artifactId>
-            <version>3.2.1</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
@@ -100,6 +102,23 @@
             <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>graphql-java-tools</artifactId>
             <version>5.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.databind.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+            <version>${jackson.databind.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.aexp.nodes.graphql</groupId>
+            <artifactId>nodes</artifactId>
+            <version>0.4.0</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -125,25 +144,52 @@
             <version>${idempiere-micro-test-support.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>io.aexp.nodes.graphql</groupId>
-            <artifactId>nodes</artifactId>
-            <version>0.4.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>${jackson.databind.version}</version>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>com.natpryce</groupId>
             <artifactId>konfig</artifactId>
             <version>1.6.10.0</version>
         </dependency>
+        <dependency>
+            <groupId>space.traversal.kapsule</groupId>
+            <artifactId>kapsule-core</artifactId>
+            <version>0.3</version>
+        </dependency>
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-client</artifactId>
+            <version>3.1.11</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Support for JDK 9 and above -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>2.3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
     </dependencies>
     
     <build>
@@ -218,10 +264,46 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <!-- see: https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
+                    <argLine>-Xmx1024m -Xms1024m -XX:MaxPermSize=512m
+                        -Djdk.net.URLClassPath.disableClassPathURLCheck=true
+                    </argLine>
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/*Test.kt</include>
+                    </includes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.openliberty.features</groupId>
+                <artifactId>features-bom</artifactId>
+                <version>RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Repository Switchboard</name>
+            <layout>default</layout>
+            <url>http://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
         <repository>
             <id>jcenter</id>
             <url>https://jcenter.bintray.com/</url>
@@ -229,6 +311,10 @@
         <repository>
             <id>bintray-americanexpress-maven</id>
             <url>https://dl.bintray.com/americanexpress/maven</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 </project>

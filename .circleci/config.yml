@@ -1,0 +1,104 @@
+# Java Maven CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # we still want to run on JDK 8
+      - image: circleci/openjdk:8-jdk-node-browsers-legacy
+
+      # we still want to support 9.6, the list is at https://circleci.com/docs/2.0/circleci-images/#postgresql
+      - image: circleci/postgres:9.6-alpine-postgis-ram
+        environment:
+          POSTGRES_USER: adempiere
+          POSTGRES_PASSWORD: adempiere
+          POSTGRES_DB: idempiere
+
+    working_directory: ~/repo
+
+    environment:
+      # Customize the JVM maximum heap limit
+      MAVEN_OPTS: -Xmx3200m -DforkCount=0
+      DATABASE_URL: jdbc:postgresql://localhost:5432/idempiere
+      DATABASE_USERNAME: adempiere
+      DATABASE_PASSWORD: adempiere
+      JWT_SECRET: Em3u7dCZ2QSvSGSGSRFUTfrwgu3WjfU2rHZxSjNSqU5x89C3jXPL6WLMW7dTE6rd9NRgWAwUWHkj8ZLfbCNU8uVfv9kuBmWCYPkk776A5jQ2LeJ76bZbdhXN
+      JWT_ISSUER: Kotlin_Spring
+
+      SESSION_CORE_VERSION: 0.0.3
+      TEST_SUPPORT_VERSION: 0.0.3
+      INVOICING_CORE_VERSION: 0.5.0
+
+      BASE_INTERFACES_VERSION: 0.5.0
+      MODEL_CORE_VERSION: 0.5.1
+      MODEL_INTERFACES_VERSION: 0.5.1
+      CRM_CORE_VERSION: 0.5.0
+      PRODUCT_CORE_VERSION: 0.5.0
+      TAX_CORE_VERSION: 0.5.0
+      ORDER_CORE_VERSION: 0.5.1
+      PROCESS_CORE_VERSION: 0.5.0
+
+
+    steps:
+      - setup_remote_docker
+      - checkout
+
+      - run:
+          name: Install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.6.1
+
+      - run:
+          name: Installing Dependencies
+          command: |
+            sudo apt-get install postgresql-client
+
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      # run the migrations
+      - run:
+          name: Setup iDempiere database
+          command: |
+            ( cd /tmp; wget https://raw.githubusercontent.com/iDempiere-micro/idempiere-micro-db/6.1/V1__iDempiere_6.1.0.sql )
+            ( cd /tmp; PGPASSWORD=adempiere psql idempiere -h localhost -p 5432 -U adempiere -f ./V1__iDempiere_6.1.0.sql )
+
+      # run tests!
+      - run:
+          name: Package code
+          command: |
+            mvn package
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build      

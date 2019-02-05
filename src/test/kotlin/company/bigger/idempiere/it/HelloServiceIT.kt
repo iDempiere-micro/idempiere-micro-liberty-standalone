@@ -15,13 +15,19 @@
  *******************************************************************************/
 package company.bigger.idempiere.it
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.fasterxml.jackson.module.kotlin.readValue
 import company.bigger.idempiere.it.graphql.VersionRequest
+import company.bigger.idempiere.it.rest.UserLoginModelDTO
 import company.bigger.idempiere.resolver.QueryResolver
 import io.aexp.nodes.graphql.GraphQLRequestEntity
 import io.aexp.nodes.graphql.GraphQLResponseEntity
 import io.aexp.nodes.graphql.GraphQLTemplate
 import org.junit.Test
+import javax.ws.rs.client.ClientBuilder
 import kotlin.test.assertEquals
+
 
 class HelloServiceIT {
 
@@ -31,22 +37,33 @@ class HelloServiceIT {
     private val path = "graphql"
     private val graphQLUrl = "http://localhost:$port/$contextName/$path"
 
-    /*private fun getGardenUserToken(): String {
-        val client = ClientBuilder.newClient()
+    private fun getGardenUserToken(): String {
         val url = "http://localhost:$port/$contextName/session/GardenUser/login/GardenUser"
+
+        val client = ClientBuilder.newClient()
         val target = client.target(url)
         val response = target.request().get()
         assertEquals(200, response.status)
-        return ""
-    }*/
+        val json = response.readEntity(String::class.java)
+        println( "json response received: '$json'" )
+
+        response.close()
+        client.close()
+
+        val mapper = ObjectMapper().registerModule(KotlinModule())
+        val result = mapper.readValue<UserLoginModelDTO>(json)
+
+        return result.token
+    }
+
 
     fun <T> getGraphQL(t: Class<T>): GraphQLResponseEntity<T> {
-        //val token = getGardenUserToken()
+        val token = getGardenUserToken()
         val graphQLTemplate = GraphQLTemplate()
         val requestEntity = GraphQLRequestEntity.Builder()
             .url(graphQLUrl)
             //.headers(mapOf("Content-Type" to "application/graphql"))
-            //.headers(mapOf("Authorization" to "Bearer $token"))
+            .headers(mapOf("Authorization" to "Bearer $token"))
             .request(t)
             .build()
         return graphQLTemplate.query(requestEntity, t)
