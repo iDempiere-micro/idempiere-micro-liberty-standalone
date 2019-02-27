@@ -10,11 +10,14 @@ import com.natpryce.konfig.stringType
 import com.natpryce.konfig.getValue
 import java.io.File
 
+// this is a hack see https://github.com/npryce/konfig/issues/36
 private val defaults = User::class.java.classLoader.getResource("defaults.properties")
 
 val config =
     EnvironmentVariables() overriding
-            ConfigurationProperties.fromFile(File(defaults.file))
+    ConfigurationProperties.fromOptionalFile(File("/etc/idempiere-micro.properties")) overriding
+    // must be optional as the file is not found when running from the standalone JAR
+    ConfigurationProperties.fromOptionalFile(File(defaults.file))
 
 object User : PropertyGroup() {
     private val password_hash by booleanType // User.User-password-hash
