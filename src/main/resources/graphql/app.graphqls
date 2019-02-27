@@ -1,3 +1,27 @@
+# User
+type User {
+    # Full Name
+    description: String!
+    # System ID
+    id: ID!
+}
+
+# CRM Category
+type Category {
+    # Name
+    name: String!
+    # Id
+    id: ID!
+}
+
+# Country
+#type Country {
+    # Name
+#    name: String!
+    # Id
+#    id: ID!
+#}
+
 # Version
 type Version {
    # SemVer identifier
@@ -7,8 +31,22 @@ type Version {
 type Query {
     # The API Version
     version: Version!
+    # The currently logged user
+    me: User!
+    # All the system users
+    #users: [User]!
+    # All the crm categories
+    #categories: [Category]!
+    # All countries
+    #countries: [Country]!
+}
+
+type Mutation {
+   createCategory(name: String!, value: String!): ID!
+   echo(what: String!): String!
 }
 
 schema {
     query: Query
+    mutation: Mutation
 }

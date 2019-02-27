@@ -1,6 +1,13 @@
 package company.bigger.idempiere.config
 
-import com.natpryce.konfig.*
+import com.natpryce.konfig.ConfigurationProperties
+import com.natpryce.konfig.EnvironmentVariables
+import com.natpryce.konfig.PropertyGroup
+import com.natpryce.konfig.overriding
+import com.natpryce.konfig.booleanType
+import com.natpryce.konfig.intType
+import com.natpryce.konfig.stringType
+import com.natpryce.konfig.getValue
 import java.io.File
 
 private val defaults = User::class.java.classLoader.getResource("defaults.properties")
@@ -23,7 +30,7 @@ object Locking : PropertyGroup() {
 
     private val max_password_age_day by intType // Locking.max-password-age-day
 
-    private val max_login_attempt by intType// Locking.max-login-attempt
+    private val max_login_attempt by intType // Locking.max-login-attempt
     val maxLoggingAttempts = config[max_login_attempt]
 }
 

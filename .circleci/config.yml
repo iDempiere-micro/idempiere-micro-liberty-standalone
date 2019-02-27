@@ -27,18 +27,7 @@ jobs:
       JWT_SECRET: Em3u7dCZ2QSvSGSGSRFUTfrwgu3WjfU2rHZxSjNSqU5x89C3jXPL6WLMW7dTE6rd9NRgWAwUWHkj8ZLfbCNU8uVfv9kuBmWCYPkk776A5jQ2LeJ76bZbdhXN
       JWT_ISSUER: Kotlin_Spring
 
-      SESSION_CORE_VERSION: 0.0.3
-      TEST_SUPPORT_VERSION: 0.0.3
-      INVOICING_CORE_VERSION: 0.5.0
-
-      BASE_INTERFACES_VERSION: 0.5.0
-      MODEL_CORE_VERSION: 0.5.1
-      MODEL_INTERFACES_VERSION: 0.5.1
-      CRM_CORE_VERSION: 0.5.0
-      PRODUCT_CORE_VERSION: 0.5.0
-      TAX_CORE_VERSION: 0.5.0
-      ORDER_CORE_VERSION: 0.5.1
-      PROCESS_CORE_VERSION: 0.5.0
+      IDEMPIERE_MICRO_VERSION: 0.10.0
 
 
     steps:
@@ -83,9 +72,9 @@ jobs:
 
       # run tests!
       - run:
-          name: Package code
+          name: Install code
           command: |
-            mvn package
+            mvn install
 
 workflows:
   version: 2

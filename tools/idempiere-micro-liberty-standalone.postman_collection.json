@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "dc293b27-10b3-4e05-aa55-4efbc5103559",
+		"name": "idempiere-micro-liberty-standalone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GraphQL Version",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "query {\n    version {\n    \tv\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"idempiere-micro-liberty-standalone",
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GraphQL Version Prod",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "query {\n    version {\n    \tv\n    }\n}"
+				},
+				"url": {
+					"raw": "https://idempiere-micro-liberty-standalone.eu-gb.mybluemix.net/graphql",
+					"protocol": "https",
+					"host": [
+						"idempiere-micro-liberty-standalone",
+						"eu-gb",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/session/GardenUser/login/GardenUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"idempiere-micro-liberty-standalone",
+						"session",
+						"GardenUser",
+						"login",
+						"GardenUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Me",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDk0NTI0MjMsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTAzMTY0MjN9.BqS5PNldnxu7iZ6yEKJnpCbT68aDZ1CrO-l6vG2pXM0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/session/me",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"idempiere-micro-liberty-standalone",
+						"session",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GraphQL Me",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDk0NTI0MjMsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTAzMTY0MjN9.BqS5PNldnxu7iZ6yEKJnpCbT68aDZ1CrO-l6vG2pXM0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "query {\n    me {\n    \tid\n    \tdescription\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"idempiere-micro-liberty-standalone",
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

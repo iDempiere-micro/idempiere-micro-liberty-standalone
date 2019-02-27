@@ -1,21 +1,33 @@
 package company.bigger.idempiere.di
 
-import company.bigger.idempiere.config.Jwt
-import company.bigger.idempiere.config.Locking
-import company.bigger.idempiere.config.User
+import company.bigger.idempiere.service.AuthenticationService
 import company.bigger.service.LoginService
 import company.bigger.service.UserService
+import software.hsharp.core.models.EnvironmentService
+import space.traversal.kapsule.HasModules
 
-class Module {
-    val loginService = LoginService(
-        User.passwordHash,
-        Locking.maxAccountLockMinutes,
-        Locking.maxInactivePeriodDays,
-        Locking.maxLoggingAttempts
-    )
-    val userService = UserService(
-        loginService,
-        jwtSecret = Jwt.Secret,
-        jwtIssuer = Jwt.Issuer
-    )
+class Module(
+    environment: EnvironmentModule,
+    logic: LogicModule,
+    data: DataModule
+) :
+    EnvironmentModule by environment,
+    LogicModule by logic,
+    DataModule by data,
+    HasModules {
+
+    override val modules = setOf(data, logic)
+}
+
+interface DataModule {
+    val userService: UserService
+}
+
+interface LogicModule {
+    val loginService: LoginService
+    val authenticationService: AuthenticationService
+}
+
+interface EnvironmentModule {
+    val environmentService: EnvironmentService
 }
