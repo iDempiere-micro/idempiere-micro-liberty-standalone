@@ -34,7 +34,7 @@ type Query {
     # The currently logged user
     me: User!
     # All the system users
-    #users: [User]!
+    users: [User]!
     # All the crm categories
     #categories: [Category]!
     # All countries
@@ -42,7 +42,7 @@ type Query {
 }
 
 type Mutation {
-   createCategory(name: String!, value: String!): ID!
+   createCategory(name: String!, value: String!): Category!
    echo(what: String!): String!
 }
 

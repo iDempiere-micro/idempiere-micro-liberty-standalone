@@ -1,6 +1,7 @@
 package company.bigger.idempiere.di
 
 import company.bigger.idempiere.service.AuthenticationService
+import company.bigger.idempiere.service.UsersService
 import company.bigger.service.LoginService
 import company.bigger.service.UserService
 import software.hsharp.core.models.EnvironmentService
@@ -21,6 +22,7 @@ class Module(
 
 interface DataModule {
     val userService: UserService
+    val usersService: UsersService
 }
 
 interface LogicModule {

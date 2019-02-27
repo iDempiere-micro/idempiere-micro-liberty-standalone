@@ -5,13 +5,14 @@ import software.hsharp.core.util.HikariCPI
 import space.traversal.kapsule.transitive
 
 private val mainLogicModule = MainLogicModule()
+private val mainEnvironmentModule = MainEnvironmentModule()
 
 open class Context {
     open val module =
         Module(
-            environment = MainEnvironmentModule(),
+            environment = mainEnvironmentModule,
             logic = mainLogicModule,
-            data = MainDataModule(mainLogicModule)
+            data = MainDataModule(mainLogicModule, mainEnvironmentModule)
         ).transitive()
 }
 

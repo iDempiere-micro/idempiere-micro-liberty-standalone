@@ -20,6 +20,7 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
 import company.bigger.idempiere.it.graphql.CurrentUserGraphQLResponse
 import company.bigger.idempiere.it.graphql.EchoGraphQLResponse
+import company.bigger.idempiere.it.graphql.GetUsersGraphQLResponse
 import company.bigger.idempiere.it.graphql.VersionRequest
 import company.bigger.idempiere.it.rest.CurrentUserResponse
 import company.bigger.idempiere.it.rest.UserLoginModelResponse
@@ -28,12 +29,14 @@ import io.aexp.nodes.graphql.GraphQLRequestEntity
 import io.aexp.nodes.graphql.GraphQLResponseEntity
 import io.aexp.nodes.graphql.GraphQLTemplate
 import khttp.post
+import org.junit.Ignore
 import org.junit.Test
 import javax.ws.rs.client.ClientBuilder
 import kotlin.test.assertEquals
 
 private const val USER = "GardenUser"
 private const val TEST = "test"
+private const val USER_ID = 102
 
 class HelloServiceIT {
 
@@ -104,7 +107,7 @@ class HelloServiceIT {
     fun `can login and ask for me`() {
         val token = getGardenUserToken()
         val me: CurrentUserResponse = getRest("/session/me?access_token=$token")
-        assertEquals(102, me.id)
+        assertEquals(USER_ID, me.id)
         assertEquals(USER, me.name)
     }
 
@@ -125,14 +128,39 @@ class HelloServiceIT {
 }"""
         val response: CurrentUserGraphQLResponse = getPoorMansGraphQL(query)
         val me = response.data.me
-        assertEquals(102.toString(), me.id)
+        assertEquals(USER_ID.toString(), me.id)
         assertEquals(USER, me.description)
+    }
+
+    @Test
+    fun `Can ask the GraphQL for users`() {
+        val query = """query {
+    users {
+    	id
+    	description
+    }
+}"""
+        val response: GetUsersGraphQLResponse = getPoorMansGraphQL(query)
+        val users = response.data.users
+        assertEquals(2, users.size)
+        assertEquals(USER, users.first { it.id == USER_ID.toString() }.description)
     }
 
     @Test
     fun `Can ask the GraphQL to echo`() {
         val query = """mutation {
   echo(what: "$TEST")
+}"""
+        val response: EchoGraphQLResponse = getPoorMansGraphQL(query)
+        val result = response.data.echo
+        assertEquals(TEST, result)
+    }
+
+    // TODO: run CRM migrations to add a category
+    @Ignore
+    fun `Can ask the GraphQL to create a category`() {
+        val query = """mutation {
+  createCategory(name: "$TEST", value: "$TEST")
 }"""
         val response: EchoGraphQLResponse = getPoorMansGraphQL(query)
         val result = response.data.echo

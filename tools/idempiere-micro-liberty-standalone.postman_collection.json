@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "dc293b27-10b3-4e05-aa55-4efbc5103559",
+		"_postman_id": "45e5f5f9-a428-47bb-8cf0-d4d7e93e5c16",
 		"name": "idempiere-micro-liberty-standalone",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -8,6 +8,16 @@
 		{
 			"name": "GraphQL Version",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTEzMDI4NzMsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTIxNjY4NzN9.FNYEcgYa5pbQGkJMhmk1Dp61cyoH2u77RnZcZeZmZvs",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -18,6 +28,84 @@
 				"body": {
 					"mode": "raw",
 					"raw": "query {\n    version {\n    \tv\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"idempiere-micro-liberty-standalone",
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GraphQL Echo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTEzMDM1MzIsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTIxNjc1MzJ9.awQjTuTgkuuI-_hc9O-c0YqCDrgrScjB16tV_tS2IUk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mutation {\n  echo(what: \"TEST\")\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"idempiere-micro-liberty-standalone",
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GraphQL Create Category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTEzMDM1MzIsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTIxNjc1MzJ9.awQjTuTgkuuI-_hc9O-c0YqCDrgrScjB16tV_tS2IUk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mutation {\n  createCategory(name: \"TEST1\", value: \"TEST1\") {\n    id\n    name\n  }\n}"
 				},
 				"url": {
 					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/graphql",
@@ -69,7 +157,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/session/GardenUser/login/GardenUser",
 					"protocol": "http",
@@ -96,14 +187,17 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDk0NTI0MjMsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTAzMTY0MjN9.BqS5PNldnxu7iZ6yEKJnpCbT68aDZ1CrO-l6vG2pXM0",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTEzMDQ0MzMsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTIxNjg0MzN9.4hpOBui4K8G2-hDG-0-eYztRb5R9KTpjcl2WYgnfKbs",
 							"type": "string"
 						}
 					]
 				},
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/session/me",
 					"protocol": "http",
@@ -128,7 +222,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDk0NTI0MjMsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTAzMTY0MjN9.BqS5PNldnxu7iZ6yEKJnpCbT68aDZ1CrO-l6vG2pXM0",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTEzMDQ0MzMsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTIxNjg0MzN9.4hpOBui4K8G2-hDG-0-eYztRb5R9KTpjcl2WYgnfKbs",
 							"type": "string"
 						}
 					]
@@ -143,6 +237,45 @@
 				"body": {
 					"mode": "raw",
 					"raw": "query {\n    me {\n    \tid\n    \tdescription\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"idempiere-micro-liberty-standalone",
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GraphQL Users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTEzMDQ2NDIsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTIxNjg2NDJ9.TQeqZJFW2TA1ajwqP7PiLo8bRc8OhbY8Pm0n0Rl8Ywo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "query {\n    users {\n    \tid\n    \tdescription\n    }\n}"
 				},
 				"url": {
 					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/graphql",
