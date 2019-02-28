@@ -6,6 +6,16 @@ type User {
     id: ID!
 }
 
+# Business Partner
+type BusinessPartner {
+    # Full Name
+    name: String!
+    # System ID
+    id: ID!
+    # Seach key
+    searchKey: String!
+}
+
 # CRM Category
 type Category {
     # Name
@@ -39,10 +49,13 @@ type Query {
     #categories: [Category]!
     # All countries
     #countries: [Country]!
+    # All business partners
+    businessPartners: [BusinessPartner]!
 }
 
 type Mutation {
    createCategory(name: String!, value: String!): Category!
+   createBusinessPartner(name: String!, searchKey: String!): BusinessPartner!
    echo(what: String!): String!
 }
 

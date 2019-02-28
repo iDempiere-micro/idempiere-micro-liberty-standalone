@@ -18,6 +18,7 @@ class QueryResolver : BaseResolver(), GraphQLQueryResolver {
     val version = Version(VER)
     val me get() = DB.run { authenticationService.currentUser() }
     val users get() = DB.run { usersService.getUsers() }
+    val businessPartners get() = DB.run { businessPartnerService.getBusinessPartners() }
     /*
     val categories get() = categoryService?.getAllCategories()
     val countries get() = countryService?.getAllCountries()

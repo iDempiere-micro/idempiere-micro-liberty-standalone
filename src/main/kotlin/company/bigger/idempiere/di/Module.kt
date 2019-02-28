@@ -1,6 +1,7 @@
 package company.bigger.idempiere.di
 
 import company.bigger.idempiere.service.AuthenticationService
+import company.bigger.idempiere.service.BusinessPartnerService
 import company.bigger.idempiere.service.UsersService
 import company.bigger.service.LoginService
 import company.bigger.service.UserService
@@ -23,6 +24,7 @@ class Module(
 interface DataModule {
     val userService: UserService
     val usersService: UsersService
+    val businessPartnerService: BusinessPartnerService
 }
 
 interface LogicModule {

@@ -4,6 +4,7 @@ import com.coxautodev.graphql.tools.GraphQLMutationResolver
 import company.bigger.idempiere.di.globalContext
 import company.bigger.idempiere.dto.BusinessPartnerCategory
 import org.compiere.crm.MCrmCategory
+import org.compiere.model.I_C_BPartner
 import org.idempiere.common.util.Env
 import software.hsharp.core.util.DB
 import space.traversal.kapsule.inject
@@ -23,6 +24,12 @@ class MutationResolver : BaseResolver(), GraphQLMutationResolver {
             result.setSearchKey(value)
             result.save()
             BusinessPartnerCategory(result)
+        }
+    }
+
+    fun createBusinessPartner(name: String, searchKey: String): I_C_BPartner {
+        return DB.run {
+            businessPartnerService.createBusinessPartner(name, searchKey)
         }
     }
 

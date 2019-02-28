@@ -123,6 +123,45 @@
 			"response": []
 		},
 		{
+			"name": "GraphQL Create Business Partner",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTEzNTcwODgsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTIyMjEwODh9.rhj3YPwC7E4xswsaBl4G21qHQeB1ElyL7m6DmTlJqzc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mutation {\n  createBusinessPartner(name: \"TEST1\", searchKey: \"TEST1\") {\n    id\n    name\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"idempiere-micro-liberty-standalone",
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "GraphQL Version Prod",
 			"request": {
 				"method": "POST",
@@ -254,6 +293,45 @@
 			"response": []
 		},
 		{
+			"name": "GraphQL Business Partners",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTEzNTcwODgsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTIyMjEwODh9.rhj3YPwC7E4xswsaBl4G21qHQeB1ElyL7m6DmTlJqzc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "query {\n    businessPartners {\n    \tid\n    \tname\n    \tsearchKey\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"idempiere-micro-liberty-standalone",
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "GraphQL Users",
 			"request": {
 				"auth": {
@@ -261,7 +339,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTEzMDQ2NDIsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTIxNjg2NDJ9.TQeqZJFW2TA1ajwqP7PiLo8bRc8OhbY8Pm0n0Rl8Ywo",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTEzMDY1ODksInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTIxNzA1ODl9.YzHSHOUZhwFkhZyrwc-hCmZtOTc9sEHxNUaCDnw-AyY",
 							"type": "string"
 						}
 					]

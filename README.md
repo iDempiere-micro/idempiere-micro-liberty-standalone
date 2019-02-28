@@ -27,3 +27,33 @@ Then edit `/etc/idempiere-micro.properties` and setup accordingly.
 ### Using [OpenLiberty](https://openliberty.io/)
 `mvn liberty:run-server`
 
+## Try with cURL
+_Note instead of cURL you can also install [Postman](https://www.getpostman.com/) and 
+import  [the iDempiere micro Postman collection](https://github.com/iDempiere-micro/idempiere-micro-liberty-standalone/blob/master/tools/idempiere-micro-liberty-standalone.postman_collection.json)_.
+
+### Prerequisities
+
+You need [jq](https://stedolan.github.io/jq/) to parse the JSON returned by login.
+
+### Authenticate
+#### Get the JWT token for _GardenUser_
+
+`token=$( curl http://localhost:9080/idempiere-micro-liberty-standalone/session/GardenUser/login/GardenUser | jq -r ".token")
+`
+### Query
+#### Get the current user
+
+`curl -H "Content-Type: application/graphql" -H "Authorization: Bearer $token" --request POST --data 'query { me { id description } }' http://localhost:9080/idempiere-micro-liberty-standalone/graphql`
+
+#### Get the list of the users
+
+`curl -H "Content-Type: application/graphql" -H "Authorization: Bearer $token" --request POST --data 'query { users { id description } }' http://localhost:9080/idempiere-micro-liberty-standalone/graphql`
+
+#### Get the list of the business partners
+
+`curl -H "Content-Type: application/graphql" -H "Authorization: Bearer $token" --request POST --data 'query { businessPartners { id name searchKey } }' http://localhost:9080/idempiere-micro-liberty-standalone/graphql`
+
+### Mutate
+#### Create a business partners
+
+`curl -H "Content-Type: application/graphql" -H "Authorization: Bearer $token" --request POST --data 'mutation { createBusinessPartner(name: "TEST1", searchKey: "TEST1") { id name } }' http://localhost:9080/idempiere-micro-liberty-standalone/graphql`
