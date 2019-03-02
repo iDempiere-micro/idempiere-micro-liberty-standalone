@@ -1,9 +1,28 @@
 # User
 type User {
+    # Name
+    name: String!
+    # Email
+    EMail: String
     # Full Name
-    description: String!
+    description: String
     # System ID
     id: ID!
+}
+
+type Location {
+    address1: String
+    address2: String
+    address3: String
+    address4: String
+    address5: String
+    city: String
+    countryName: String
+}
+
+
+type BusinessPartnerLocation {
+    location: Location
 }
 
 # Business Partner
@@ -14,6 +33,14 @@ type BusinessPartner {
     id: ID!
     # Seach key
     searchKey: String!
+    # DUNS
+    DUNS: String
+    # Sales Representative Id
+    salesRepresentativeId: Int
+    # Contacts
+    contacts: [User]
+    # Locations
+    locations: [BusinessPartnerLocation]
 }
 
 # CRM Category
@@ -53,10 +80,47 @@ type Query {
     businessPartners: [BusinessPartner]!
 }
 
+input BusinessPartnerInput {
+    searchKey: String!
+    legalName: String!
+    categoryName: String
+    dunsNumber: String
+    vatNumber: String
+    email: String
+    isCustomer: Boolean
+    note: String
+    flatDiscount: Int
+    branchName: String
+    branchPhone: String
+    branchStreet: String
+    branchCity: String
+    branchZip: String
+    branchCountry: String
+    ownerPhone: String
+    legalStreet: String
+    legalCity: String
+    legalZip: String
+    legalCountry: String
+    orderContactName: String
+    orderContactPhone: String
+    orderContactEmail: String
+    decisionMakerContactName: String
+    decisionMakerContactPhone: String
+    decisionMakerContactEmail: String
+    invoicingContactName: String
+    invoicingContactPhone: String
+    invoicingContactEmail: String
+}
+
+input ComplexInput {
+    content: String!
+}
+
 type Mutation {
    createCategory(name: String!, value: String!): Category!
-   createBusinessPartner(name: String!, searchKey: String!): BusinessPartner!
+   createBusinessPartner(businessPartner: BusinessPartnerInput!): BusinessPartner!
    echo(what: String!): String!
+   echoComplex(what: ComplexInput!): String!
 }
 
 schema {

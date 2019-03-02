@@ -84,6 +84,45 @@
 			"response": []
 		},
 		{
+			"name": "GraphQL Complex Echo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTE0NjQxMDUsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTIzMjgxMDV9.hX7KlAIGV27M9D3trYqzhuQdx-8tAg94AdLcp6Gu1iM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mutation {\n  echoComplex(what: { content: \"complex test\" } )\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"idempiere-micro-liberty-standalone",
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "GraphQL Create Category",
 			"request": {
 				"auth": {
@@ -130,7 +169,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTEzNTcwODgsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTIyMjEwODh9.rhj3YPwC7E4xswsaBl4G21qHQeB1ElyL7m6DmTlJqzc",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTE0NjY1MTMsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTIzMzA1MTN9.v1-0INQ6t3B8h7H2MK6KXTxbNFVEGm4sicxFaQn9kpU",
 							"type": "string"
 						}
 					]
@@ -144,7 +183,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "mutation {\n  createBusinessPartner(name: \"TEST1\", searchKey: \"TEST1\") {\n    id\n    name\n  }\n}"
+					"raw": "mutation {\n  createBusinessPartner(businessPartner: { legalName: \"TEST1\", searchKey: \"TEST1\" } ) {\n    id\n    name\n  }\n}"
 				},
 				"url": {
 					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/graphql",
@@ -300,7 +339,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTEzNTcwODgsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTIyMjEwODh9.rhj3YPwC7E4xswsaBl4G21qHQeB1ElyL7m6DmTlJqzc",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTE0NjY1MTMsInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTIzMzA1MTN9.v1-0INQ6t3B8h7H2MK6KXTxbNFVEGm4sicxFaQn9kpU",
 							"type": "string"
 						}
 					]

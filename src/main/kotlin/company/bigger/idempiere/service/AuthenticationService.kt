@@ -3,6 +3,7 @@ package company.bigger.idempiere.service
 import company.bigger.dto.UserLoginModelResponse
 import mu.KotlinLogging
 import org.compiere.crm.MUser
+import org.compiere.model.I_AD_User
 import org.idempiere.common.util.Env
 
 private const val NO_ID = "-1"
@@ -32,7 +33,7 @@ class AuthenticationService {
         }
     }
 
-    fun currentUser(): MUser? {
+    fun currentUser(): I_AD_User? {
         logger.debug { ">>> currentUser called" }
         val ctx = Env.getCtx()
         val userId = Env.getContext(ctx, Env.AD_USER_ID)

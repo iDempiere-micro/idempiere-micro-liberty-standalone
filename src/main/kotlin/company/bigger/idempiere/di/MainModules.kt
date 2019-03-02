@@ -27,7 +27,8 @@ class MainDataModule(mainLogicModule: MainLogicModule, mainEnvironmentModule: Ma
         jwtIssuer = Jwt.Issuer
     )
     override val usersService = UsersService(mainEnvironmentModule.environmentService)
-    override val businessPartnerService = BusinessPartnerService(mainEnvironmentModule.environmentService)
+    override val businessPartnerService =
+        BusinessPartnerService(mainEnvironmentModule.environmentService)
 }
 
 class MainEnvironmentModule : EnvironmentModule {

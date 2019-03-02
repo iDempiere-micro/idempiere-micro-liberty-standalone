@@ -1,18 +1,3 @@
-/*******************************************************************************
- * (c) Copyright IBM Corporation 2017.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *******************************************************************************/
 package company.bigger.idempiere.it
 
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -22,9 +7,12 @@ import company.bigger.idempiere.it.graphql.CurrentUserGraphQLResponse
 import company.bigger.idempiere.it.graphql.EchoGraphQLResponse
 import company.bigger.idempiere.it.graphql.GetUsersGraphQLResponse
 import company.bigger.idempiere.it.graphql.VersionRequest
+import company.bigger.idempiere.it.graphql.ComplexEchoGraphQLResponse
+import company.bigger.idempiere.it.graphql.CreateBusinessPartnerGraphQLResponse
 import company.bigger.idempiere.it.rest.CurrentUserResponse
 import company.bigger.idempiere.it.rest.UserLoginModelResponse
 import company.bigger.idempiere.resolver.QueryResolver
+import company.bigger.test.support.randomString
 import io.aexp.nodes.graphql.GraphQLRequestEntity
 import io.aexp.nodes.graphql.GraphQLResponseEntity
 import io.aexp.nodes.graphql.GraphQLTemplate
@@ -35,7 +23,7 @@ import javax.ws.rs.client.ClientBuilder
 import kotlin.test.assertEquals
 
 private const val USER = "GardenUser"
-private const val TEST = "test"
+private val TEST = "test-" + randomString(5)
 private const val USER_ID = 102
 
 class HelloServiceIT {
@@ -164,6 +152,29 @@ class HelloServiceIT {
 }"""
         val response: EchoGraphQLResponse = getPoorMansGraphQL(query)
         val result = response.data.echo
+        assertEquals(TEST, result)
+    }
+
+    @Test
+    fun `Can ask the GraphQL to complex echo with input`() {
+        val query = """mutation {
+  echoComplex(what: { content: "$TEST" } )
+}"""
+        val response: ComplexEchoGraphQLResponse = getPoorMansGraphQL(query)
+        val result = response.data.echoComplex
+        assertEquals(TEST, result)
+    }
+
+    @Test
+    fun `Can create a business partner with GraphQL`() {
+        val query = """mutation {
+  createBusinessPartner(businessPartner: { legalName: "$TEST", searchKey: "$TEST" } ) {
+    id
+    name
+  }
+}"""
+        val response: CreateBusinessPartnerGraphQLResponse = getPoorMansGraphQL(query)
+        val result = response.data.createBusinessPartner.name
         assertEquals(TEST, result)
     }
 }

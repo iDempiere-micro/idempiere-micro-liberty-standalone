@@ -10,7 +10,7 @@ The standalone all-in-one iDempiere-micro microservice containing all the module
 
 Have [iDempiere-micro PosgreSQL Docker 6.2](https://github.com/iDempiere-micro/idempiere-docker-pgsql-6.1/tree/6.2) running on port 5433 to have the tests succeed.
 
-`IDEMPIERE_MICRO_VERSION=0.10.0 mvn clean install -P minify-runnable-package`
+`IDEMPIERE_MICRO_VERSION=0.11.0 mvn clean install -P minify-runnable-package`
 
 ## Run
 
@@ -49,11 +49,11 @@ You need [jq](https://stedolan.github.io/jq/) to parse the JSON returned by logi
 
 `curl -H "Content-Type: application/graphql" -H "Authorization: Bearer $token" --request POST --data 'query { users { id description } }' http://localhost:9080/idempiere-micro-liberty-standalone/graphql`
 
-#### Get the list of the business partners
+#### Get the list of the business partners with contacts and locations
 
-`curl -H "Content-Type: application/graphql" -H "Authorization: Bearer $token" --request POST --data 'query { businessPartners { id name searchKey } }' http://localhost:9080/idempiere-micro-liberty-standalone/graphql`
+`curl -H "Content-Type: application/graphql" -H "Authorization: Bearer $token" --request POST --data 'query { businessPartners { id name searchKey DUNS contacts {id description} locations {location {address1} }  } }' http://localhost:9080/idempiere-micro-liberty-standalone/graphql`
 
 ### Mutate
 #### Create a business partners
 
-`curl -H "Content-Type: application/graphql" -H "Authorization: Bearer $token" --request POST --data 'mutation { createBusinessPartner(name: "TEST1", searchKey: "TEST1") { id name } }' http://localhost:9080/idempiere-micro-liberty-standalone/graphql`
+`curl -H "Content-Type: application/graphql" -H "Authorization: Bearer $token" --request POST --data 'mutation { createBusinessPartner(businessPartner: { legalName: "TEST1", searchKey: "TEST1" } ) { id name } }' http://localhost:9080/idempiere-micro-liberty-standalone/graphql`
