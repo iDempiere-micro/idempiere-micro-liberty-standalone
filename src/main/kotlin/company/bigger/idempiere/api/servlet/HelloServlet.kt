@@ -13,8 +13,6 @@ import javax.servlet.ServletException
 import javax.servlet.http.HttpServletResponse
 import javax.servlet.http.HttpServletRequest
 
-
-
 @WebServlet(name = "HelloServlet", urlPatterns = ["graphql"], loadOnStartup = 1)
 class HelloServlet : GraphQLHttpServlet() {
 

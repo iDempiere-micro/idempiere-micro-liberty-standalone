@@ -1,6 +1,6 @@
 package company.bigger.idempiere.dto
 
-import software.hsharp.core.models.CreateBusinessPartnerInput
+import org.compiere.model.CreateBusinessPartnerInput
 
 data class BusinessPartnerInput(
     override val searchKey: String,

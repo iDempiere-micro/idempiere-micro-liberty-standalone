@@ -3,7 +3,6 @@ package company.bigger.idempiere.resolver
 import com.coxautodev.graphql.tools.GraphQLQueryResolver
 import company.bigger.idempiere.di.globalContext
 import company.bigger.idempiere.dto.Version
-import software.hsharp.core.util.DB
 import space.traversal.kapsule.inject
 
 class QueryResolver : BaseResolver(), GraphQLQueryResolver {
@@ -18,9 +17,8 @@ class QueryResolver : BaseResolver(), GraphQLQueryResolver {
     val version = Version(VER)
     val me get() = authenticationService.currentUser()
     val users get() = usersService.getUsers()
-    val businessPartners get() = businessPartnerService.getBusinessPartners()
-    /*
-    val categories get() = categoryService?.getAllCategories()
-    val countries get() = countryService?.getAllCountries()
-    */
+    val businessPartners get() = businessPartnerService.getAll()
+    val currencies get() = currencyService.getAll()
+    val countries get() = countryService.getAll()
+    val categories get() = categoryService.getAll()
 }

@@ -1,11 +1,12 @@
 package company.bigger.idempiere.di
 
 import company.bigger.idempiere.service.AuthenticationService
-import company.bigger.idempiere.service.BusinessPartnerService
-import company.bigger.idempiere.service.UsersService
+import org.compiere.orm.UsersService
 import company.bigger.service.LoginService
 import company.bigger.service.UserService
+import org.compiere.crm.ContactActivityService
 import software.hsharp.core.models.EnvironmentService
+import software.hsharp.services.*
 import space.traversal.kapsule.HasModules
 
 class Module(
@@ -25,6 +26,12 @@ interface DataModule {
     val userService: UserService
     val usersService: UsersService
     val businessPartnerService: BusinessPartnerService
+    val currencyService: CurrencyService
+    val countryService: CountryService
+    val categoryService: CategoryService
+    val businessOpportunityService: BusinessOpportunityService
+    val salesStageService: SalesStageService
+    val contactActivityService: ContactActivityService
 }
 
 interface LogicModule {

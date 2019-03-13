@@ -5,10 +5,11 @@ import company.bigger.idempiere.di.globalContext
 import company.bigger.idempiere.dto.BusinessPartnerCategory
 import company.bigger.idempiere.dto.BusinessPartnerInput
 import company.bigger.idempiere.dto.ComplexInput
+import company.bigger.idempiere.dto.ContactActivityInput
 import org.compiere.crm.MCrmCategory
 import org.compiere.model.I_C_BPartner
+import org.compiere.model.I_C_ContactActivity
 import org.idempiere.common.util.Env
-import software.hsharp.core.util.DB
 import space.traversal.kapsule.inject
 
 class MutationResolver : BaseResolver(), GraphQLMutationResolver {
@@ -27,11 +28,28 @@ class MutationResolver : BaseResolver(), GraphQLMutationResolver {
         return BusinessPartnerCategory(result)
     }
 
+    /**
+     * Create a business partner based on the [businessPartner] parameters
+     */
     fun createBusinessPartner(businessPartner: BusinessPartnerInput): I_C_BPartner {
         return businessPartnerService.createBusinessPartner(businessPartner)
     }
 
+    fun createContactActivity(contactActivity: ContactActivityInput): I_C_ContactActivity {
+        return with(contactActivity) {
+            contactActivityService.createContactActivity(
+                businessPartner, startDate, description, contactActivityType
+            )
+        }
+    }
+
+    /**
+     * Basic echo function
+     */
     fun echo(what: String): String = what
 
+    /**
+     * Slightly more complex echo function
+     */
     fun echoComplex(what: ComplexInput): String = what.content
 }
