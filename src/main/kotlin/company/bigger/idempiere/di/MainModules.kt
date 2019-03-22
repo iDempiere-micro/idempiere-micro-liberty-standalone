@@ -13,7 +13,7 @@ import org.compiere.crm.BusinessPartnerServiceImpl
 import org.compiere.crm.CategoryServiceImpl
 import org.compiere.crm.ContactActivityService
 import org.compiere.crm.CountryServiceImpl
-import org.compiere.product.CurrencyServiceImpl
+import org.compiere.bo.CurrencyServiceImpl
 import org.idempiere.common.util.EnvironmentServiceImpl
 
 class MainLogicModule : LogicModule {

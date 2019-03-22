@@ -17,7 +17,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <packaging.type>minify,runnable</packaging.type>
-        <kotlin.version>1.3.10</kotlin.version>
+        <kotlin.version>1.3.21</kotlin.version>
         <testServerHttpPort>9080</testServerHttpPort>
         <testServerHttpsPort>9443</testServerHttpsPort>
         <warContext>idempiere-micro-liberty-standalone</warContext>
@@ -26,18 +26,7 @@
         <liberty.version>RELEASE</liberty.version>
 
         <idempiere-micro.groupId>org.idempiere</idempiere-micro.groupId>
-        <idempiere-micro-invoicing-core.version>1.0-SNAPSHOT</idempiere-micro-invoicing-core.version>
-        <idempiere-micro-session-core.version>1.0-SNAPSHOT</idempiere-micro-session-core.version>
-        <idempiere-micro-test-support.version>1.0-SNAPSHOT</idempiere-micro-test-support.version>
-
-        <idempiere-micro-base-interfaces.version>1.0-SNAPSHOT</idempiere-micro-base-interfaces.version>
-        <idempiere-micro-model-core.version>1.0-SNAPSHOT</idempiere-micro-model-core.version>
-        <idempiere-micro-model-interfaces.version>1.0-SNAPSHOT</idempiere-micro-model-interfaces.version>
-        <idempiere-micro-crm-core.version>1.0-SNAPSHOT</idempiere-micro-crm-core.version>
-        <idempiere-micro-product-core.version>1.0-SNAPSHOT</idempiere-micro-product-core.version>
-        <idempiere-micro-tax-core.version>1.0-SNAPSHOT</idempiere-micro-tax-core.version>
-        <idempiere-micro-order-core.version>1.0-SNAPSHOT</idempiere-micro-order-core.version>
-        <idempiere-micro-process-core.version>1.0-SNAPSHOT</idempiere-micro-process-core.version>
+        <idempiere-micro.version>1.0-SNAPSHOT</idempiere-micro.version>
 
     </properties>
 
@@ -58,18 +47,7 @@
             </activation>
             <properties>
                 <idempiere-micro.groupId>com.github.iDempiere-micro</idempiere-micro.groupId>
-                <idempiere-micro-invoicing-core.version>${env.IDEMPIERE_MICRO_VERSION}</idempiere-micro-invoicing-core.version>
-                <idempiere-micro-session-core.version>${env.IDEMPIERE_MICRO_VERSION}</idempiere-micro-session-core.version>
-                <idempiere-micro-test-support.version>${env.IDEMPIERE_MICRO_VERSION}</idempiere-micro-test-support.version>
-
-                <idempiere-micro-base-interfaces.version>${env.IDEMPIERE_MICRO_VERSION}</idempiere-micro-base-interfaces.version>
-                <idempiere-micro-model-core.version>${env.IDEMPIERE_MICRO_VERSION}</idempiere-micro-model-core.version>
-                <idempiere-micro-model-interfaces.version>${env.IDEMPIERE_MICRO_VERSION}</idempiere-micro-model-interfaces.version>
-                <idempiere-micro-crm-core.version>${env.IDEMPIERE_MICRO_VERSION}</idempiere-micro-crm-core.version>
-                <idempiere-micro-product-core.version>${env.IDEMPIERE_MICRO_VERSION}</idempiere-micro-product-core.version>
-                <idempiere-micro-tax-core.version>${env.IDEMPIERE_MICRO_VERSION}</idempiere-micro-tax-core.version>
-                <idempiere-micro-order-core.version>${env.IDEMPIERE_MICRO_VERSION}</idempiere-micro-order-core.version>
-                <idempiere-micro-process-core.version>${env.IDEMPIERE_MICRO_VERSION}</idempiere-micro-process-core.version>
+                <idempiere-micro.version>${env.IDEMPIERE_MICRO_VERSION}</idempiere-micro.version>
 
             </properties>
         </profile>
@@ -84,7 +62,7 @@
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib</artifactId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
 
@@ -147,19 +125,12 @@
         <dependency>
             <groupId>${idempiere-micro.groupId}</groupId>
             <artifactId>idempiere-micro-invoicing-core</artifactId>
-            <version>${idempiere-micro-invoicing-core.version}</version>
+            <version>${idempiere-micro.version}</version>
         </dependency>
         <dependency>
             <groupId>${idempiere-micro.groupId}</groupId>
             <artifactId>idempiere-micro-session-core</artifactId>
-            <version>${idempiere-micro-session-core.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>${idempiere-micro.groupId}</groupId>
-            <artifactId>idempiere-micro-test-support</artifactId>
-            <version>${idempiere-micro-test-support.version}</version>
-            <scope>test</scope>
+            <version>${idempiere-micro.version}</version>
         </dependency>
 
         <dependency>
@@ -207,26 +178,37 @@
             <artifactId>activation</artifactId>
             <version>1.1.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     
     <build>
         <finalName>${project.artifactId}</finalName>
-        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
-        <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>src/test/kotlin</testSourceDirectory>
         <plugins>
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
+                <configuration>
+                    <jvmTarget>1.8</jvmTarget>
+                </configuration>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <version>${kotlin.version}</version>
                 <executions>
                     <execution>
                         <id>compile</id>
+                        <phase>compile</phase>
                         <goals>
                             <goal>compile</goal>
                         </goals>
                     </execution>
                     <execution>
                         <id>test-compile</id>
+                        <phase>test-compile</phase>
                         <goals>
                             <goal>test-compile</goal>
                         </goals>

@@ -6,7 +6,12 @@ import company.bigger.service.LoginService
 import company.bigger.service.UserService
 import org.compiere.crm.ContactActivityService
 import software.hsharp.core.models.EnvironmentService
-import software.hsharp.services.*
+import software.hsharp.services.BusinessPartnerService
+import software.hsharp.services.CategoryService
+import software.hsharp.services.CountryService
+import software.hsharp.services.CurrencyService
+import software.hsharp.services.BusinessOpportunityService
+import software.hsharp.services.SalesStageService
 import space.traversal.kapsule.HasModules
 
 class Module(

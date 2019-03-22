@@ -12,15 +12,26 @@ import company.bigger.idempiere.it.graphql.CreateBusinessPartnerGraphQLResponse
 import company.bigger.idempiere.it.rest.CurrentUserResponse
 import company.bigger.idempiere.it.rest.UserLoginModelResponse
 import company.bigger.idempiere.resolver.QueryResolver
-import company.bigger.test.support.randomString
 import io.aexp.nodes.graphql.GraphQLRequestEntity
 import io.aexp.nodes.graphql.GraphQLResponseEntity
 import io.aexp.nodes.graphql.GraphQLTemplate
 import khttp.post
 import org.junit.Ignore
 import org.junit.Test
+import java.util.Random
 import javax.ws.rs.client.ClientBuilder
 import kotlin.test.assertEquals
+
+/**
+ * Generate a random string (small letters)
+ */
+fun randomString(length: Int): String {
+    fun ClosedRange<Char>.randomString(length: Int) =
+        (1..length)
+            .map { (Random().nextInt(endInclusive.toInt() - start.toInt()) + start.toInt()).toChar() }
+            .joinToString("")
+    return ('a'..'z').randomString(length)
+}
 
 private const val USER = "GardenUser"
 private val TEST = "test-" + randomString(5)
@@ -144,11 +155,10 @@ class HelloServiceIT {
         assertEquals(TEST, result)
     }
 
-    // TODO: run CRM migrations to add a category
     @Ignore
     fun `Can ask the GraphQL to create a category`() {
         val query = """mutation {
-  createCategory(name: "$TEST", value: "$TEST")
+  createCategory(name: "$TEST", value: "$TEST") { id }
 }"""
         val response: EchoGraphQLResponse = getPoorMansGraphQL(query)
         val result = response.data.echo

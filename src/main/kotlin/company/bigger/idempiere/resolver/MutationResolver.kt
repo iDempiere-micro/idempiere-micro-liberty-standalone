@@ -3,7 +3,7 @@ package company.bigger.idempiere.resolver
 import com.coxautodev.graphql.tools.GraphQLMutationResolver
 import company.bigger.idempiere.di.globalContext
 import company.bigger.idempiere.dto.BusinessPartnerCategory
-import company.bigger.idempiere.dto.BusinessPartnerInput
+import org.compiere.crm.BusinessPartnerInput
 import company.bigger.idempiere.dto.ComplexInput
 import company.bigger.idempiere.dto.ContactActivityInput
 import org.compiere.crm.MCrmCategory
