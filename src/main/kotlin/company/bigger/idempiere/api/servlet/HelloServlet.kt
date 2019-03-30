@@ -29,6 +29,24 @@ class HelloServlet : GraphQLHttpServlet() {
 
     @Throws(ServletException::class, IOException::class)
     public override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
+        setAccessControlHeaders(response)
         DB.run { super.doPost(request, response) }
+    }
+
+    //for Preflight
+    @Throws(ServletException::class, IOException::class)
+    override fun doOptions(req: HttpServletRequest?, resp: HttpServletResponse) {
+        setAccessControlHeaders(resp)
+        resp.status = HttpServletResponse.SC_OK
+    }
+
+    private fun setAccessControlHeaders(resp: HttpServletResponse) {
+        resp.setHeader("Access-Control-Allow-Origin", "*")
+        resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+        resp.setHeader("Access-Control-Allow-Credentials", "true")
+        resp.setHeader(
+            "Access-Control-Allow-Headers",
+            "origin, content-type, accept, authorization"
+        )
     }
 }

@@ -21,4 +21,6 @@ class QueryResolver : BaseResolver(), GraphQLQueryResolver {
     val currencies get() = currencyService.getAll()
     val countries get() = countryService.getAll()
     val categories get() = categoryService.getAll()
+    val salesOrders get() = salesOrderService.getAll()
+    val products get() = productService.getAll()
 }

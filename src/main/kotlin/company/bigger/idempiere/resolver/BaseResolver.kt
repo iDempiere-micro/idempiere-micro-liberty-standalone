@@ -12,4 +12,7 @@ abstract class BaseResolver : Injects<Module> {
     protected val countryService by required { countryService }
     protected val categoryService by required { categoryService }
     protected val contactActivityService by required { contactActivityService }
+    protected val salesOrderService by required { salesOrderService }
+    protected val productService by required { productService }
+    protected val userService by required { userService }
 }

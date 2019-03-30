@@ -3,12 +3,14 @@ package company.bigger.idempiere.it
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
+import company.bigger.idempiere.it.graphql.BusinessPartnersWithCategoriesResponse
 import company.bigger.idempiere.it.graphql.CurrentUserGraphQLResponse
 import company.bigger.idempiere.it.graphql.EchoGraphQLResponse
 import company.bigger.idempiere.it.graphql.GetUsersGraphQLResponse
 import company.bigger.idempiere.it.graphql.VersionRequest
 import company.bigger.idempiere.it.graphql.ComplexEchoGraphQLResponse
 import company.bigger.idempiere.it.graphql.CreateBusinessPartnerGraphQLResponse
+import company.bigger.idempiere.it.graphql.GetProductsResponse
 import company.bigger.idempiere.it.rest.CurrentUserResponse
 import company.bigger.idempiere.it.rest.UserLoginModelResponse
 import company.bigger.idempiere.resolver.QueryResolver
@@ -187,4 +189,43 @@ class HelloServiceIT {
         val result = response.data.createBusinessPartner.name
         assertEquals(TEST, result)
     }
+
+    @Test
+    fun `Can ask the GraphQL for business partners with categories`() {
+        val query = """query {
+    businessPartners {
+    	id
+    	name
+    	searchKey
+    	IsCustomer
+    	URL
+    	categories {
+    	    id
+    	    name
+    	}
+    }
+}"""
+        val response: BusinessPartnersWithCategoriesResponse = getPoorMansGraphQL(query)
+        val businessPartners = response.data
+    }
+
+    @Test
+    fun `can ask the GrapQL for products with hands on quantities`() {
+        val query = """query {
+    products {
+	    id
+		name
+		UOM {
+			Name
+		}
+    	StorageOnHand {
+    		QtyOnHand
+    	}
+    }
+}"""
+        val response: GetProductsResponse = getPoorMansGraphQL(query)
+        val products = response.data
+
+    }
+
 }

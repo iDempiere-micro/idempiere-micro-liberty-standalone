@@ -11,6 +11,8 @@ import software.hsharp.services.CategoryService
 import software.hsharp.services.CountryService
 import software.hsharp.services.CurrencyService
 import software.hsharp.services.BusinessOpportunityService
+import software.hsharp.services.ProductService
+import software.hsharp.services.SalesOrderService
 import software.hsharp.services.SalesStageService
 import space.traversal.kapsule.HasModules
 
@@ -37,6 +39,8 @@ interface DataModule {
     val businessOpportunityService: BusinessOpportunityService
     val salesStageService: SalesStageService
     val contactActivityService: ContactActivityService
+    val salesOrderService: SalesOrderService
+    val productService: ProductService
 }
 
 interface LogicModule {

@@ -1,15 +1,20 @@
 package company.bigger.idempiere.resolver
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver
+import company.bigger.dto.UserLoginModel
+import company.bigger.dto.UserLoginModelResponse
 import company.bigger.idempiere.di.globalContext
-import company.bigger.idempiere.dto.BusinessPartnerCategory
 import org.compiere.crm.BusinessPartnerInput
 import company.bigger.idempiere.dto.ComplexInput
 import company.bigger.idempiere.dto.ContactActivityInput
+import kotliquery.sessionOf
+import kotliquery.using
 import org.compiere.crm.MCrmCategory
 import org.compiere.model.I_C_BPartner
 import org.compiere.model.I_C_ContactActivity
 import org.idempiere.common.util.Env
+import software.hsharp.core.util.HikariCPI
+import software.hsharp.models.CrmCategory
 import space.traversal.kapsule.inject
 
 class MutationResolver : BaseResolver(), GraphQLMutationResolver {
@@ -20,12 +25,12 @@ class MutationResolver : BaseResolver(), GraphQLMutationResolver {
     /**
      * Create a CRM Category with [name] name. The search [value] needs to be unique for the client.
      */
-    fun createCategory(name: String, value: String): BusinessPartnerCategory {
+    fun createCategory(name: String, value: String): CrmCategory {
         val result = MCrmCategory(Env.getCtx(), 0)
         result.name = name
         result.searchKey = value
         result.save()
-        return BusinessPartnerCategory(result)
+        return result
     }
 
     /**
@@ -52,4 +57,13 @@ class MutationResolver : BaseResolver(), GraphQLMutationResolver {
      * Slightly more complex echo function
      */
     fun echoComplex(what: ComplexInput): String = what.content
+
+    /**
+     * Login user
+     */
+    fun login(login: UserLoginModel): UserLoginModelResponse? {
+        return using(sessionOf(HikariCPI.dataSource())) { session ->
+            userService.login(session, login)
+        }
+    }
 }

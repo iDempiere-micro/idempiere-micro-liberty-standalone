@@ -132,6 +132,16 @@
             <artifactId>idempiere-micro-session-core</artifactId>
             <version>${idempiere-micro.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${idempiere-micro.groupId}</groupId>
+            <artifactId>idempiere-micro-model-interfaces</artifactId>
+            <version>${idempiere-micro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${idempiere-micro.groupId}</groupId>
+            <artifactId>idempiere-micro-order-core</artifactId>
+            <version>${idempiere-micro.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.natpryce</groupId>

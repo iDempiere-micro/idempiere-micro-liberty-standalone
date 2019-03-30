@@ -10,7 +10,7 @@ The standalone all-in-one iDempiere-micro microservice containing all the module
 
 Have [iDempiere-micro PosgreSQL Docker 6.2](https://github.com/iDempiere-micro/idempiere-docker-pgsql-6.1/tree/6.2) running on port 5433 to have the tests succeed.
 
-`IDEMPIERE_MICRO_VERSION=0.19.0 mvn clean install -P minify-runnable-package`
+`IDEMPIERE_MICRO_VERSION=0.20.0 mvn clean install -P minify-runnable-package`
 
 ## Run
 

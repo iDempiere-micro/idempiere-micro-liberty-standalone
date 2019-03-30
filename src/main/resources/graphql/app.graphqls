@@ -21,8 +21,34 @@ type Location {
 }
 
 
+type SalesOrder {
+    DocumentNo: String
+    Description: String
+    DateOrderedISOFormat: String
+    GrandTotal: Float
+    Customer: BusinessPartner
+}
+
 type BusinessPartnerLocation {
     location: Location
+}
+
+type StorageOnHand {
+    DateUpdatedISOFormat: String
+    QtyOnHand: Float
+}
+
+type UOM {
+    Name: String
+    UOMSymbol: String
+}
+
+type Product {
+    # System ID
+    id: ID!
+    name: String!
+    UOM: UOM
+    StorageOnHand: [StorageOnHand]
 }
 
 # Business Partner
@@ -41,6 +67,18 @@ type BusinessPartner {
     contacts: [User]
     # Locations
     locations: [BusinessPartnerLocation]
+    # URL (or email)
+    URL: String
+    # Description
+    Description: String
+    # TaxID
+    TaxID: String
+    # Is a Customer?
+    IsCustomer: Boolean
+    # Flat Discount
+    FlatDiscount: Int
+    # CRM Categories
+    categories: [Category]
 }
 
 # CRM Category
@@ -52,12 +90,19 @@ type Category {
 }
 
 # Country
-#type Country {
+type Country {
     # Name
-#    name: String!
+    name: String!
+    # code
+    CountryCode: String!
     # Id
-#    id: ID!
-#}
+    id: ID!
+}
+
+type Currency {
+    CurrencySymbol: String!
+    ISOCode: String!
+}
 
 # Version
 type Version {
@@ -73,11 +118,17 @@ type Query {
     # All the system users
     users: [User]!
     # All the crm categories
-    #categories: [Category]!
+    categories: [Category]!
     # All countries
-    #countries: [Country]!
+    countries: [Country]!
     # All business partners
     businessPartners: [BusinessPartner]!
+    # All currencies
+    currencies: [Currency]!
+    # All sales orders
+    salesOrders: [SalesOrder]!
+    # All products
+    products: [Product]!
 }
 
 input BusinessPartnerInput {
@@ -116,11 +167,26 @@ input ComplexInput {
     content: String!
 }
 
+input LoginRequest {
+    loginName: String!
+    password: String!
+    clientId: Int
+}
+
+type LoginResponse {
+    logged: Boolean!
+    token: String
+    clientId: Int
+    userId: Int
+}
+
+
 type Mutation {
-   createCategory(name: String!, value: String!): Category!
-   createBusinessPartner(businessPartner: BusinessPartnerInput!): BusinessPartner!
-   echo(what: String!): String!
-   echoComplex(what: ComplexInput!): String!
+    createCategory(name: String!, value: String!): Category!
+    createBusinessPartner(businessPartner: BusinessPartnerInput!): BusinessPartner!
+    echo(what: String!): String!
+    echoComplex(what: ComplexInput!): String!
+    login(login: LoginRequest!): LoginResponse
 }
 
 schema {

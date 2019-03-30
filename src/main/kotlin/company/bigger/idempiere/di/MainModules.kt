@@ -14,6 +14,8 @@ import org.compiere.crm.CategoryServiceImpl
 import org.compiere.crm.ContactActivityService
 import org.compiere.crm.CountryServiceImpl
 import org.compiere.bo.CurrencyServiceImpl
+import org.compiere.order.SalesOrderServiceImpl
+import org.compiere.product.ProductServiceImpl
 import org.idempiere.common.util.EnvironmentServiceImpl
 
 class MainLogicModule : LogicModule {
@@ -49,6 +51,8 @@ class MainDataModule(mainLogicModule: MainLogicModule, mainEnvironmentModule: Ma
             salesStageService,
             currencyService
         )
+    override val salesOrderService = SalesOrderServiceImpl(environmentService)
+    override val productService = ProductServiceImpl(environmentService)
 }
 
 class MainEnvironmentModule : EnvironmentModule {
