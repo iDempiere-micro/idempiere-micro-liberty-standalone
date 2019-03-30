@@ -2,6 +2,7 @@ package company.bigger.idempiere.it
 
 import kotliquery.Row
 import org.compiere.orm.DefaultModelFactory
+import org.flywaydb.core.Flyway
 import org.idempiere.common.util.Env
 import org.idempiere.icommon.model.IPO
 import org.junit.Test
@@ -18,6 +19,19 @@ class SimpleTest {
     init {
         System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "WARN")
         HikariCPI.default(sessionUrl, "adempiere", "adempiere")
+
+        // TODO: This should not be here. The migration should be exposed from the crm-core module
+        // Create the Flyway instance and point it to the database
+        val flyway =
+            Flyway
+                .configure()
+                .dataSource(sessionUrl, "adempiere", "adempiere")
+                .baselineOnMigrate(true)
+                .baselineVersion("0")
+                .load()
+
+        // Start the migration
+        flyway.migrate()
     }
 
     @Test
