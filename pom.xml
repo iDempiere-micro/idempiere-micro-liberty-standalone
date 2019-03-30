@@ -51,6 +51,18 @@
 
             </properties>
         </profile>
+        <profile>
+            <id>jitpack</id>
+            <activation>
+                <property>
+                    <name>env.JITPACK</name>
+                </property>
+            </activation>
+            <properties>
+                <idempiere-micro.groupId>com.github.iDempiere-micro</idempiere-micro.groupId>
+                <idempiere-micro.version>0.20.0</idempiere-micro.version>
+            </properties>
+        </profile>
     </profiles>
     
     <dependencies>
