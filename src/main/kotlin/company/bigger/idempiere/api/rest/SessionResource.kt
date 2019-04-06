@@ -2,12 +2,16 @@ package company.bigger.idempiere.api.rest
 
 import company.bigger.dto.UserLoginModel
 import company.bigger.dto.UserLoginModelResponse
-import company.bigger.idempiere.di.Module
+import company.bigger.idempiere.di.ModuleImpl
 import company.bigger.idempiere.di.globalContext
+import company.bigger.idempiere.service.AuthenticationService
+import company.bigger.service.UserService
 import kotliquery.sessionOf
 import kotliquery.using
 import org.compiere.model.I_AD_User
+import software.hsharp.core.services.EnvironmentService
 import software.hsharp.core.util.DB
+import software.hsharp.core.util.Environment
 import software.hsharp.core.util.HikariCPI
 import space.traversal.kapsule.Injects
 import space.traversal.kapsule.inject
@@ -30,9 +34,10 @@ data class User(
 
 @Path("/session")
 @ApplicationPath("/")
-open class SessionResource : Application(), Injects<Module> {
-    private val sessionService by required { userService }
-    private val authenticationService by required { authenticationService }
+open class SessionResource : Application(), Injects<ModuleImpl> {
+    private val sessionService: UserService by required { userService }
+    private val authenticationService: AuthenticationService by required { authenticationService }
+    private val environmentService: EnvironmentService by required { environmentService }
 
     init {
         inject(globalContext.module)
@@ -45,8 +50,10 @@ open class SessionResource : Application(), Injects<Module> {
         @PathParam("username") username: String,
         @PathParam("password") password: String
     ): UserLoginModelResponse? {
-        return using(sessionOf(HikariCPI.dataSource())) { session ->
-            sessionService.login(session, UserLoginModel(username, password))
+        return Environment.run(globalContext.module) {
+            using(sessionOf(HikariCPI.dataSource())) { session ->
+                sessionService.login(session, UserLoginModel(username, password))
+            }
         }
     }
 
@@ -54,6 +61,8 @@ open class SessionResource : Application(), Injects<Module> {
     @Path("/me")
     @Produces(MediaType.APPLICATION_JSON)
     fun me(): User? {
-        return DB.run { authenticationService.currentUser()?.let { User(it) } }
+        return Environment.run(globalContext.module) {
+            DB.run { authenticationService.currentUser()?.let { User(it) } }
+        }
     }
 }

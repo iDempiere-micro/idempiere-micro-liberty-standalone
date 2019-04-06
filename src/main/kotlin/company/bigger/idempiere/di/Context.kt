@@ -8,8 +8,8 @@ private val mainLogicModule = MainLogicModule()
 private val mainEnvironmentModule = MainEnvironmentModule()
 
 open class Context {
-    open val module =
-        Module(
+    open val module: ModuleImpl =
+        ModuleImpl(
             environment = mainEnvironmentModule,
             logic = mainLogicModule,
             data = MainDataModule(mainLogicModule, mainEnvironmentModule)

@@ -225,7 +225,5 @@ class HelloServiceIT {
 }"""
         val response: GetProductsResponse = getPoorMansGraphQL(query)
         val products = response.data
-
     }
-
 }

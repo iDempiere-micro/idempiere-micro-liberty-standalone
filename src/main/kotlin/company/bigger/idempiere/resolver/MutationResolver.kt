@@ -12,7 +12,6 @@ import kotliquery.using
 import org.compiere.crm.MCrmCategory
 import org.compiere.model.I_C_BPartner
 import org.compiere.model.I_C_ContactActivity
-import org.idempiere.common.util.Env
 import software.hsharp.core.util.HikariCPI
 import software.hsharp.models.CrmCategory
 import space.traversal.kapsule.inject
@@ -26,7 +25,7 @@ class MutationResolver : BaseResolver(), GraphQLMutationResolver {
      * Create a CRM Category with [name] name. The search [value] needs to be unique for the client.
      */
     fun createCategory(name: String, value: String): CrmCategory {
-        val result = MCrmCategory(Env.getCtx(), 0)
+        val result = MCrmCategory(0)
         result.name = name
         result.searchKey = value
         result.save()

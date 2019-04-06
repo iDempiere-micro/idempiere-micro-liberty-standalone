@@ -1,7 +1,10 @@
 package company.bigger.idempiere.api.filter
 
-import company.bigger.idempiere.di.Module
+import company.bigger.idempiere.di.ModuleImpl
 import company.bigger.idempiere.di.globalContext
+import company.bigger.service.UserService
+import org.idempiere.common.util.AdempiereSystemError
+import software.hsharp.core.services.EnvironmentService
 import space.traversal.kapsule.Injects
 import space.traversal.kapsule.inject
 import space.traversal.kapsule.required
@@ -19,10 +22,10 @@ private const val AUTH_HEADER_VALUE_PREFIX_ALT = "Token " // with trailing space
 private const val STATUS_CODE_UNAUTHORIZED = 401
 
 @WebFilter("/*")
-class TokenFilter : Filter, Injects<Module> {
+class TokenFilter : Filter, Injects<ModuleImpl> {
 
-    private val userService by required { userService }
-    private val authenticationService by required { authenticationService }
+    private val userService: UserService by required { userService }
+    private val environmentService: EnvironmentService by required { environmentService }
 
     private fun getToken(request: HttpServletRequest): String? {
 
@@ -42,7 +45,10 @@ class TokenFilter : Filter, Injects<Module> {
         if (authToken != null) {
             val user = userService.findByToken(authToken)
             if (user != null) {
-                authenticationService.setCurrentUser(user)
+                environmentService.login(
+                    user.clientId ?: throw AdempiereSystemError("User does not have client"), 0,
+                    user.userId ?: throw AdempiereSystemError("User does not have id")
+                )
             }
         }
 
