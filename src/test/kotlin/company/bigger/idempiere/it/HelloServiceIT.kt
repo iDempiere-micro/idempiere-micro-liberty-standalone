@@ -10,7 +10,9 @@ import company.bigger.idempiere.it.graphql.GetUsersGraphQLResponse
 import company.bigger.idempiere.it.graphql.VersionRequest
 import company.bigger.idempiere.it.graphql.ComplexEchoGraphQLResponse
 import company.bigger.idempiere.it.graphql.CreateBusinessPartnerGraphQLResponse
+import company.bigger.idempiere.it.graphql.CreateCategoryGraphQLResponse
 import company.bigger.idempiere.it.graphql.GetProductsResponse
+import company.bigger.idempiere.it.graphql.GetServiceOrderGraphQLResponse
 import company.bigger.idempiere.it.rest.CurrentUserResponse
 import company.bigger.idempiere.it.rest.UserLoginModelResponse
 import company.bigger.idempiere.resolver.QueryResolver
@@ -157,13 +159,13 @@ class HelloServiceIT {
         assertEquals(TEST, result)
     }
 
-    @Ignore
+    @Test
     fun `Can ask the GraphQL to create a category`() {
         val query = """mutation {
-  createCategory(name: "$TEST", value: "$TEST") { id }
+  createCategory(name: "$TEST", value: "$TEST") { id name }
 }"""
-        val response: EchoGraphQLResponse = getPoorMansGraphQL(query)
-        val result = response.data.echo
+        val response: CreateCategoryGraphQLResponse = getPoorMansGraphQL(query)
+        val result = response.data.createCategory.name
         assertEquals(TEST, result)
     }
 
@@ -226,4 +228,35 @@ class HelloServiceIT {
         val response: GetProductsResponse = getPoorMansGraphQL(query)
         val products = response.data
     }
+
+    @Test
+    fun `Can ask the GraphQL for a sales order`() {
+        val query = """query {
+    salesOrder(id: 105) {
+	    DocumentNo
+		Description
+    	DateOrderedISOFormat
+    	GrandTotal
+    	Customer {
+    	  id
+    	  name
+    	}
+    	Lines {
+    		Product {
+    		    id
+    		    name
+    		}
+    		QtyOrdered
+    		UOM {
+    		    Name
+    		    UOMSymbol
+    		}
+    	}
+    }
+}"""
+        val response: GetServiceOrderGraphQLResponse = getPoorMansGraphQL(query)
+        val serviceOrder = response.data
+        assertEquals("800001", serviceOrder.salesOrder.DocumentNo)
+    }
+
 }

@@ -20,13 +20,23 @@ type Location {
     countryName: String
 }
 
+type OrderLine {
+    Product: Product!
+    UOM: UOM!
+    QtyOrdered: Float
+    QtyDelivered: Float
+}
 
 type SalesOrder {
+    id: ID!
     DocumentNo: String
     Description: String
     DateOrderedISOFormat: String
+    DateAccountingISOFormat: String
     GrandTotal: Float
     Customer: BusinessPartner
+    Lines: [OrderLine]
+    BusinessPartnerLocation: BusinessPartnerLocation
 }
 
 type BusinessPartnerLocation {
@@ -129,6 +139,8 @@ type Query {
     salesOrders: [SalesOrder]!
     # All products
     products: [Product]!
+    # Sales order
+    salesOrder(id:Int): SalesOrder!
 }
 
 input BusinessPartnerInput {

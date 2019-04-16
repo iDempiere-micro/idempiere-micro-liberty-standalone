@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "45e5f5f9-a428-47bb-8cf0-d4d7e93e5c16",
+		"_postman_id": "2de7c0fd-1ac7-40ce-857f-fb5f84e0ce11",
 		"name": "idempiere-micro-liberty-standalone",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -432,6 +432,45 @@
 				"body": {
 					"mode": "raw",
 					"raw": "query {\n    salesOrders {\n\t    DocumentNo\n\t\tDescription\n    \tDateOrderedISOFormat\n    \tGrandTotal\n    \tCustomer {\n    \t  id\n    \t  name\n    \t}  \n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"idempiere-micro-liberty-standalone",
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GraphQL SalesOrder 105",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTQyMDQzNjksInN1YiI6IkdhcmRlblVzZXIiLCJpc3MiOiJLT1RMSU4iLCJleHAiOjE1NTUwNjgzNjl9.SJ-colSl6hrTvPUrqaOd5SVbfqagFyEMmr9VpxFbnvk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/graphql"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "query {\n    salesOrder(id: 105) {\n\t    DocumentNo\n\t\tDescription\n    \tDateOrderedISOFormat\n    \tGrandTotal\n    \tCustomer {\n    \t  id\n    \t  name\n    \t}  \n    \tLines {\n    \t\tProduct {\n    \t\t    id\n    \t\t    name\n    \t\t}\n    \t\tQtyOrdered\n    \t\tUOM {\n    \t\t    Name\n    \t\t    UOMSymbol\n    \t\t}\n    \t}\n    }\n}"
 				},
 				"url": {
 					"raw": "http://localhost:9080/idempiere-micro-liberty-standalone/graphql",
