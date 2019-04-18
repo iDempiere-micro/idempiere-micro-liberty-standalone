@@ -3,7 +3,7 @@ package company.bigger.idempiere.it
 import org.compiere.orm.DefaultModelFactory
 import org.flywaydb.core.Flyway
 import org.idempiere.common.util.EnvironmentServiceImpl
-import org.idempiere.icommon.model.IPO
+import org.idempiere.icommon.model.PersistentObject
 import org.junit.Ignore
 import org.junit.Test
 import org.slf4j.impl.SimpleLogger
@@ -62,7 +62,7 @@ class SimpleTest {
 
     @Test
     fun `instantiate statically`() {
-        var instance: IPO
+        var instance: PersistentObject
         Environment.run(baseModule) {
             DB.run {
                 instance = org.compiere.product.MAttributeInstance(0)
@@ -235,7 +235,7 @@ class SimpleTest {
 
     @Test
     fun `instantiate statically from row`() {
-        var instance: IPO
+        var instance: PersistentObject
 
         Environment.run(baseModule) {
             DB.run {

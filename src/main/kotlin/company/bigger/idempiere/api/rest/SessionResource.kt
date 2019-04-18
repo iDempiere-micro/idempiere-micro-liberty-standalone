@@ -8,7 +8,7 @@ import company.bigger.idempiere.service.AuthenticationService
 import company.bigger.service.UserService
 import kotliquery.sessionOf
 import kotliquery.using
-import org.compiere.model.I_AD_User
+import org.compiere.model.User
 import software.hsharp.core.services.EnvironmentService
 import software.hsharp.core.util.DB
 import software.hsharp.core.util.Environment
@@ -24,12 +24,12 @@ import javax.ws.rs.PathParam
 import javax.ws.rs.core.Application
 import javax.ws.rs.core.MediaType
 
-data class User(
+data class LoggedUser(
     val id: Int,
     val name: String,
     val description: String?
 ) {
-    constructor(user: I_AD_User) : this(user.id, user.name, user.description)
+    constructor(user: User) : this(user.id, user.name, user.description)
 }
 
 @Path("/session")
@@ -60,9 +60,9 @@ open class SessionResource : Application(), Injects<ModuleImpl> {
     @GET
     @Path("/me")
     @Produces(MediaType.APPLICATION_JSON)
-    fun me(): User? {
+    fun me(): LoggedUser? {
         return Environment.run(globalContext.module) {
-            DB.run { authenticationService.currentUser()?.let { User(it) } }
+            DB.run { authenticationService.currentUser()?.let { LoggedUser(it) } }
         }
     }
 }
