@@ -19,6 +19,9 @@ internal val sessionUrl =
 val environmentService = EnvironmentServiceImpl(11, 0, 0)
 internal val baseModule = BaseModuleImpl(environmentService = environmentService, modelFactory = DefaultModelFactory())
 
+/**
+ * Simple tests
+ */
 class SimpleTest {
     init {
         System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "WARN")
@@ -38,6 +41,9 @@ class SimpleTest {
         flyway.migrate()
     }
 
+    /**
+     * Helper test to try to find the table corresponding class name
+     */
     @Ignore
     fun `instantiate every single class from ad_table dynamically`() {
         Environment.run(baseModule) {
@@ -60,6 +66,9 @@ class SimpleTest {
         }
     }
 
+    /**
+     * Helper test to make sure we are able to create a new instance of a class
+     */
     @Test
     fun `instantiate statically`() {
         var instance: PersistentObject
@@ -233,6 +242,9 @@ class SimpleTest {
         }
     }
 
+    /**
+     * Helper test to make sure we are able to load an instance of a class
+     */
     @Test
     fun `instantiate statically from row`() {
         var instance: PersistentObject
