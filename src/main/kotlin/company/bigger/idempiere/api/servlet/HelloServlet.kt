@@ -42,7 +42,8 @@ class HelloServlet : GraphQLHttpServlet(), Injects<ModuleImpl> {
     @Throws(ServletException::class, IOException::class)
     public override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
         setAccessControlHeaders(response)
-        Environment.run(globalContext.module) {
+        // Environment new instance creation must stay here
+        Environment(globalContext.module).run {
             DB.run { super.doPost(request, response) }
         }
     }

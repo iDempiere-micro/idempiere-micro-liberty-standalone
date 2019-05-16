@@ -23,6 +23,9 @@ class QueryResolver : BaseResolver(), GraphQLQueryResolver {
     val categories get() = categoryService.getAll()
     val salesOrders get() = salesOrderService.getAll()
     val products get() = productService.getAll()
+    val contactActivities get() = contactActivityService.getAll()
 
-    fun salesOrder(id:Int) = salesOrderService.getById(id)
+    fun salesOrder(id: Int) = salesOrderService.getById(id)
+    fun businessPartner(id: Int) = businessPartnerService.getById(id)
+    fun product(id: Int) = productService.getById(id)
 }
