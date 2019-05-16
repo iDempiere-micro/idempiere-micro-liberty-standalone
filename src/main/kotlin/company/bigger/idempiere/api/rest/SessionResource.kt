@@ -38,9 +38,11 @@ open class SessionResource : Application(), Injects<ModuleImpl> {
     private val sessionService: UserService by required { userService }
     private val authenticationService: AuthenticationService by required { authenticationService }
     private val environmentService: EnvironmentService by required { environmentService }
+    private val environment: Environment<ModuleImpl>
 
     init {
         inject(globalContext.module)
+        environment = Environment(globalContext.module)
     }
 
     @GET
@@ -50,7 +52,7 @@ open class SessionResource : Application(), Injects<ModuleImpl> {
         @PathParam("username") username: String,
         @PathParam("password") password: String
     ): UserLoginModelResponse? {
-        return Environment.run(globalContext.module) {
+        return environment.run {
             using(sessionOf(HikariCPI.dataSource())) { session ->
                 sessionService.login(session, UserLoginModel(username, password))
             }
@@ -61,7 +63,7 @@ open class SessionResource : Application(), Injects<ModuleImpl> {
     @Path("/me")
     @Produces(MediaType.APPLICATION_JSON)
     fun me(): LoggedUser? {
-        return Environment.run(globalContext.module) {
+        return environment.run {
             DB.run { authenticationService.currentUser()?.let { LoggedUser(it) } }
         }
     }

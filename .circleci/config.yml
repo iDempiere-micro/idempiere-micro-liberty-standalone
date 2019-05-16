@@ -28,7 +28,7 @@ jobs:
       JWT_ISSUER: Kotlin_Spring
       SESSION_URL: jdbc:postgresql://localhost:5432/idempiere?autosave=conservative
 
-      IDEMPIERE_MICRO_VERSION: 0.28.0
+      IDEMPIERE_MICRO_VERSION: 0.29.0
 
 
     steps:
@@ -40,6 +40,11 @@ jobs:
           command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
           environment:
             DOCKERIZE_VERSION: v0.6.1
+
+      - run:
+          name: Update Dependencies
+          command: |
+            sudo apt-get update
 
       - run:
           name: Installing Dependencies

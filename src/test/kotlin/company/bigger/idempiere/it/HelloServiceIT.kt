@@ -20,7 +20,6 @@ import io.aexp.nodes.graphql.GraphQLRequestEntity
 import io.aexp.nodes.graphql.GraphQLResponseEntity
 import io.aexp.nodes.graphql.GraphQLTemplate
 import khttp.post
-import org.junit.Ignore
 import org.junit.Test
 import java.util.Random
 import javax.ws.rs.client.ClientBuilder
@@ -258,5 +257,4 @@ class HelloServiceIT {
         val serviceOrder = response.data
         assertEquals("800001", serviceOrder.salesOrder.DocumentNo)
     }
-
 }

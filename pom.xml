@@ -60,7 +60,7 @@
             </activation>
             <properties>
                 <idempiere-micro.groupId>com.github.iDempiere-micro</idempiere-micro.groupId>
-                <idempiere-micro.version>0.28.0</idempiere-micro.version>
+                <idempiere-micro.version>0.29.0</idempiere-micro.version>
             </properties>
         </profile>
     </profiles>

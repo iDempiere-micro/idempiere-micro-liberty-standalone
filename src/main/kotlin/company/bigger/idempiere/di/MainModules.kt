@@ -4,6 +4,7 @@ import company.bigger.idempiere.config.Jwt
 import company.bigger.idempiere.config.Locking
 import company.bigger.idempiere.config.User
 import company.bigger.idempiere.service.AuthenticationService
+import company.bigger.idempiere.service.SimpleModelFactory
 import org.compiere.orm.UsersServiceImpl
 import company.bigger.service.LoginService
 import company.bigger.service.UserService
@@ -15,7 +16,6 @@ import org.compiere.crm.ContactActivityServiceImpl
 import org.compiere.crm.CountryServiceImpl
 import org.compiere.bo.CurrencyServiceImpl
 import org.compiere.order.SalesOrderServiceImpl
-import org.compiere.orm.DefaultModelFactory
 import org.compiere.product.ProductServiceImpl
 import org.idempiere.common.util.EnvironmentServiceImpl
 import software.hsharp.modules.DataModule
@@ -29,7 +29,7 @@ class MainLogicModule : LogicModule {
         Locking.maxLoggingAttempts
     )
     override val authenticationService = AuthenticationService()
-    override val modelFactory = DefaultModelFactory()
+    override val modelFactory = SimpleModelFactory()
 }
 
 interface DataModuleWithUserService : DataModule {
