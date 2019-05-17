@@ -40,6 +40,9 @@ private const val USER = "GardenUser"
 private val TEST = "test-" + randomString(5)
 private const val USER_ID = 102
 
+/**
+ * Integration tests
+ */
 class HelloServiceIT {
 
     // Set up the path to the rest

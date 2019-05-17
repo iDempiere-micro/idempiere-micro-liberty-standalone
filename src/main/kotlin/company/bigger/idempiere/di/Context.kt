@@ -7,6 +7,9 @@ import space.traversal.kapsule.transitive
 private val mainLogicModule = MainLogicModule()
 private val mainEnvironmentModule = MainEnvironmentModule()
 
+/**
+ * Context containing the main module
+ */
 open class Context {
     open val module: ModuleImpl =
         ModuleImpl(
@@ -21,6 +24,9 @@ private fun start(): Context {
     return Context()
 }
 
+/**
+ * The started  [Context]
+ */
 object GlobalContext {
     val globalContext = start()
 }

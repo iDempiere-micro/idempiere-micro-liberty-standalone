@@ -58,3 +58,8 @@ You need [jq](https://stedolan.github.io/jq/) to parse the JSON returned by logi
 #### Create a business partners
 
 `curl -H "Content-Type: application/graphql" -H "Authorization: Bearer $token" --request POST --data 'mutation { createBusinessPartner(businessPartner: { legalName: "TEST1", searchKey: "TEST1" } ) { id name } }' http://localhost:9080/idempiere-micro-liberty-standalone/graphql`
+
+## Check the logs
+
+Since OpenLiberty is used, the logs can be found according to [the Open Liberty server logs documentation](https://openliberty.io/guides/getting-started.html#checking-the-open-liberty-server-logs)
+at `./target/liberty/wlp/usr/servers/idempiere-micro-liberty-standaloneServer/logs` under the source code root.

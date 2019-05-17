@@ -13,17 +13,29 @@ import java.io.File
 // this is a hack see https://github.com/npryce/konfig/issues/36
 private val defaults = User::class.java.classLoader.getResource("defaults.properties")
 
+/**
+ * Global configuration read from:
+ * - environment variables OR
+ * - /etc/idempiere-micro.properties
+ * - or defaults file in the resources/defaults.properties
+ */
 val config =
     EnvironmentVariables() overriding
     ConfigurationProperties.fromOptionalFile(File("/etc/idempiere-micro.properties")) overriding
     // must be optional as the file is not found when running from the standalone JAR
     ConfigurationProperties.fromOptionalFile(File(defaults.file))
 
+/**
+ * User related configuration
+ */
 object User : PropertyGroup() {
     private val password_hash by booleanType // User.User-password-hash
     val passwordHash = config[password_hash]
 }
 
+/**
+ * User Locking related configuration
+ */
 object Locking : PropertyGroup() {
     private val max_account_lock_minutes by intType // Locking.max-account-lock-minutes
     val maxAccountLockMinutes = config[max_account_lock_minutes]
@@ -37,6 +49,9 @@ object Locking : PropertyGroup() {
     val maxLoggingAttempts = config[max_login_attempt]
 }
 
+/**
+ * JWT related configuration
+ */
 object Jwt : PropertyGroup() {
     private val secret by stringType
     val Secret = config[secret]
@@ -44,6 +59,9 @@ object Jwt : PropertyGroup() {
     val Issuer = config[issuer]
 }
 
+/**
+ * Database related configuration
+ */
 object Database : PropertyGroup() {
     private val url by stringType
     val Url = config[url]
