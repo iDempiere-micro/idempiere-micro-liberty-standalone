@@ -10,6 +10,9 @@ import kotlin.test.assertEquals
  * CRM related integration tests
  */
 class CRMIT : BaseIT() {
+    /**
+     * Can ask the GraphQL to create a category
+     */
     @Test
     fun `Can ask the GraphQL to create a category`() {
         val query = """mutation {
@@ -20,6 +23,9 @@ class CRMIT : BaseIT() {
         assertEquals(TEST, result)
     }
 
+    /**
+     * Can create a business partner with GraphQL
+     */
     @Test
     fun `Can create a business partner with GraphQL`() {
         val query = """mutation {
@@ -33,6 +39,9 @@ class CRMIT : BaseIT() {
         assertEquals(TEST, result)
     }
 
+    /**
+     * Can ask the GraphQL for business partners with categories
+     */
     @Test
     fun `Can ask the GraphQL for business partners with categories`() {
         val query = """query {
@@ -51,6 +60,4 @@ class CRMIT : BaseIT() {
         val response: BusinessPartnersWithCategoriesResponse = getPoorMansGraphQL(query)
         val businessPartners = response.data
     }
-
-
 }

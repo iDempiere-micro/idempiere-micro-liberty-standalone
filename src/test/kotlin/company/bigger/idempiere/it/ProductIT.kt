@@ -7,6 +7,9 @@ import org.junit.Test
  * Product related integration tests
  */
 class ProductIT : BaseIT() {
+    /**
+     * can ask the GrapQL for products with hands on quantities
+     */
     @Test
     fun `can ask the GrapQL for products with hands on quantities`() {
         val query = """query {
@@ -24,6 +27,4 @@ class ProductIT : BaseIT() {
         val response: GetProductsResponse = getPoorMansGraphQL(query)
         val products = response.data
     }
-
-
 }

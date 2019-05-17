@@ -1,28 +1,15 @@
 package company.bigger.idempiere.it
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.KotlinModule
-import com.fasterxml.jackson.module.kotlin.readValue
-import company.bigger.idempiere.it.graphql.BusinessPartnersWithCategoriesResponse
 import company.bigger.idempiere.it.graphql.CurrentUserGraphQLResponse
 import company.bigger.idempiere.it.graphql.EchoGraphQLResponse
 import company.bigger.idempiere.it.graphql.GetUsersGraphQLResponse
 import company.bigger.idempiere.it.graphql.VersionRequest
 import company.bigger.idempiere.it.graphql.ComplexEchoGraphQLResponse
-import company.bigger.idempiere.it.graphql.CreateBusinessPartnerGraphQLResponse
-import company.bigger.idempiere.it.graphql.CreateCategoryGraphQLResponse
-import company.bigger.idempiere.it.graphql.GetProductsResponse
 import company.bigger.idempiere.it.graphql.GetServiceOrderGraphQLResponse
 import company.bigger.idempiere.it.rest.CurrentUserResponse
-import company.bigger.idempiere.it.rest.UserLoginModelResponse
 import company.bigger.idempiere.resolver.QueryResolver
-import io.aexp.nodes.graphql.GraphQLRequestEntity
-import io.aexp.nodes.graphql.GraphQLResponseEntity
-import io.aexp.nodes.graphql.GraphQLTemplate
-import khttp.post
 import org.junit.Test
 import java.util.Random
-import javax.ws.rs.client.ClientBuilder
 import kotlin.test.assertEquals
 
 /**
