@@ -6,6 +6,9 @@ import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.ContainerResponseFilter
 import javax.ws.rs.ext.Provider
 
+/**
+ * CORS filter to allow being called from the browser
+ */
 @Provider
 class CorsFilter : ContainerResponseFilter {
 

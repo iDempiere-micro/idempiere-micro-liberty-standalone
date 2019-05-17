@@ -1,5 +1,5 @@
 package company.bigger.idempiere.it.graphql
 
-data class GetServiceOrderGraphQLResponse(
+internal data class GetServiceOrderGraphQLResponse(
     val `data`: GetServiceOrderData
 )

@@ -24,6 +24,9 @@ import javax.ws.rs.PathParam
 import javax.ws.rs.core.Application
 import javax.ws.rs.core.MediaType
 
+/**
+ * Logged user returned through the REST
+ */
 data class LoggedUser(
     val id: Int,
     val name: String,
@@ -32,6 +35,9 @@ data class LoggedUser(
     constructor(user: User) : this(user.id, user.name, user.description)
 }
 
+/**
+ * Session related API calls.
+ */
 @Path("/session")
 @ApplicationPath("/")
 open class SessionResource : Application(), Injects<ModuleImpl> {
@@ -45,6 +51,9 @@ open class SessionResource : Application(), Injects<ModuleImpl> {
         environment = Environment(globalContext.module)
     }
 
+    /**
+     * Login user
+     */
     @GET
     @Path("/{username}/login/{password}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -59,6 +68,9 @@ open class SessionResource : Application(), Injects<ModuleImpl> {
         }
     }
 
+    /**
+     * Information about the currently logged in user
+     */
     @GET
     @Path("/me")
     @Produces(MediaType.APPLICATION_JSON)

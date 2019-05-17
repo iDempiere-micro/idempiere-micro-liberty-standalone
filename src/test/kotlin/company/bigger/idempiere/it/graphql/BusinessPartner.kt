@@ -1,6 +1,6 @@
 package company.bigger.idempiere.it.graphql
 
-data class BusinessPartner(
+internal data class BusinessPartner(
     val IsCustomer: Boolean,
     val URL: String?,
     val categories: List<Any>?,

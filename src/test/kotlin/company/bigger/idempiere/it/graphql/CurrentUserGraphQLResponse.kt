@@ -1,5 +1,5 @@
 package company.bigger.idempiere.it.graphql
 
-data class CurrentUserGraphQLResponse(
+internal data class CurrentUserGraphQLResponse(
     val `data`: CurrentUserData
 )

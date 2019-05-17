@@ -1,5 +1,5 @@
 package company.bigger.idempiere.it.graphql
 
-data class ComplexEchoData(
+internal data class ComplexEchoData(
     val echoComplex: String
 )
