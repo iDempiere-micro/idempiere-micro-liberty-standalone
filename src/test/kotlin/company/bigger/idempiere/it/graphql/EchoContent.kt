@@ -1,5 +1,5 @@
 package company.bigger.idempiere.it.graphql
 
-data class EchoContent(
+internal data class EchoContent(
     val echo: String
 )

@@ -1,6 +1,6 @@
 package company.bigger.idempiere.it.graphql
 
-data class Me(
+internal data class Me(
     val description: String,
     val id: String
 )

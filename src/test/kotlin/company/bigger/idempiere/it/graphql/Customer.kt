@@ -1,6 +1,6 @@
 package company.bigger.idempiere.it.graphql
 
-data class Customer(
+internal data class Customer(
     val id: String,
     val name: String
 )

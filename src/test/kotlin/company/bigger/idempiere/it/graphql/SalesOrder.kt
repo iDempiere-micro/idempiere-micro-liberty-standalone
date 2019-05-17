@@ -1,6 +1,6 @@
 package company.bigger.idempiere.it.graphql
 
-data class SalesOrder(
+internal data class SalesOrder(
     val Customer: Customer,
     val DateOrderedISOFormat: String,
     val Description: String,

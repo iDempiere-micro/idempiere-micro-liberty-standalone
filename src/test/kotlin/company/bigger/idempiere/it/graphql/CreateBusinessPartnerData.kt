@@ -1,5 +1,5 @@
 package company.bigger.idempiere.it.graphql
 
-data class CreateBusinessPartnerData(
+internal data class CreateBusinessPartnerData(
     val createBusinessPartner: CreateBusinessPartner
 )

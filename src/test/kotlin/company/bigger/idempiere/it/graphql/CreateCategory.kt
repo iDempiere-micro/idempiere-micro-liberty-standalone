@@ -1,6 +1,6 @@
 package company.bigger.idempiere.it.graphql
 
-data class CreateCategory(
+internal data class CreateCategory(
     val id: String,
     val name: String
 )

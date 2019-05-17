@@ -1,5 +1,5 @@
 package company.bigger.idempiere.it.graphql
 
-data class CreateCategoryGraphQLResponse(
+internal data class CreateCategoryGraphQLResponse(
     val `data`: CreateCategoryData
 )

@@ -1,5 +1,5 @@
 package company.bigger.idempiere.it.graphql
 
-data class GetProductsResponseData(
+internal data class GetProductsResponseData(
     val products: List<Product>
 )

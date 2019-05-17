@@ -1,5 +1,5 @@
 package company.bigger.idempiere.it.graphql
 
-data class GetUsersGraphQLResponse(
+internal data class GetUsersGraphQLResponse(
     val `data`: GetUsers
 )

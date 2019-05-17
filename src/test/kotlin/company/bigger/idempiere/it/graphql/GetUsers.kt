@@ -1,5 +1,5 @@
 package company.bigger.idempiere.it.graphql
 
-data class GetUsers(
+internal data class GetUsers(
     val users: List<User>
 )

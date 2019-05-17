@@ -1,5 +1,5 @@
 package company.bigger.idempiere.it.graphql
 
-data class ComplexEchoGraphQLResponse(
+internal data class ComplexEchoGraphQLResponse(
     val `data`: ComplexEchoData
 )
