@@ -28,6 +28,9 @@ fun randomString(length: Int): String {
  */
 class UserServiceIT : BaseIT() {
 
+    /**
+     * can login and ask for me
+     */
     @Test
     fun `can login and ask for me`() {
         val token = getGardenUserToken()
@@ -36,6 +39,9 @@ class UserServiceIT : BaseIT() {
         assertEquals(USER, me.name)
     }
 
+    /**
+     * Can ask the GraphQL for version
+     */
     @Test
     fun `Can ask the GraphQL for version`() {
         // Make the request
@@ -43,6 +49,9 @@ class UserServiceIT : BaseIT() {
         assertEquals(QueryResolver.VER, responseEntity.response.v)
     }
 
+    /**
+     * Can ask the GraphQL for me
+     */
     @Test
     fun `Can ask the GraphQL for me`() {
         val query = """query {
@@ -57,6 +66,9 @@ class UserServiceIT : BaseIT() {
         assertEquals(USER, me.description)
     }
 
+    /**
+     * Can ask the GraphQL for users
+     */
     @Test
     fun `Can ask the GraphQL for users`() {
         val query = """query {
@@ -71,6 +83,9 @@ class UserServiceIT : BaseIT() {
         assertEquals(USER, users.first { it.id == USER_ID.toString() }.description)
     }
 
+    /**
+     * Can ask the GraphQL to echo
+     */
     @Test
     fun `Can ask the GraphQL to echo`() {
         val query = """mutation {
@@ -81,6 +96,9 @@ class UserServiceIT : BaseIT() {
         assertEquals(TEST, result)
     }
 
+    /**
+     * Can ask the GraphQL to complex echo with input
+     */
     @Test
     fun `Can ask the GraphQL to complex echo with input`() {
         val query = """mutation {
@@ -91,6 +109,9 @@ class UserServiceIT : BaseIT() {
         assertEquals(TEST, result)
     }
 
+    /**
+     * Can ask the GraphQL for a sales order
+     */
     @Test
     fun `Can ask the GraphQL for a sales order`() {
         val query = """query {
