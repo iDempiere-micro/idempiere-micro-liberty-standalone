@@ -3,9 +3,11 @@ package company.bigger.idempiere.it
 import company.bigger.idempiere.service.SimpleModelFactory
 import org.flywaydb.core.Flyway
 import org.idempiere.common.util.EnvironmentServiceImpl
+import org.junit.Test
 import org.slf4j.impl.SimpleLogger
 import software.hsharp.core.modules.BaseModuleImpl
 import software.hsharp.core.util.HikariCPI
+import kotlin.test.assertEquals
 
 internal val sessionUrl =
     System.getenv("SESSION_URL") ?: "jdbc:postgresql://localhost:5433/idempiere?autosave=conservative"
@@ -33,5 +35,11 @@ class SimpleTest {
 
         // Start the migration
         flyway.migrate()
+    }
+
+    // this test is required for the flyway to run
+    @Test
+    fun works() {
+        assertEquals(1, 1)
     }
 }
