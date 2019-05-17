@@ -37,7 +37,9 @@ class SimpleTest {
         flyway.migrate()
     }
 
-    // this test is required for the flyway to run
+    /**
+     * Simple test to make sure the test framework works AND to run the migrations. Do not remove!
+     */
     @Test
     fun works() {
         assertEquals(1, 1)
